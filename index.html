@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>退職・老後の手続きチェックナビ</title>
+<title>60代からの手続き漏れチェックナビ</title>
 <style>
 :root{
   --bg:#f3f4f6; --panel:#fff; --ink:#1f2937; --muted:#5f6b7a; --line:#d6dbe3;
@@ -119,9 +119,9 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
 <body>
 <div class="shell">
   <header class="app-header">
-    <span class="version">v1.8 / PCブラウザ推奨</span>
-    <h1>退職・老後の手続きチェックナビ</h1>
-    <p>質問に答えると、現在の状況に応じた手続きと確認事項を時系列で整理します。</p>
+    <span class="version">v2.5 / PCブラウザ推奨</span>
+    <h1>60代からの手続き漏れチェックナビ</h1>
+    <p>質問に答えると、退職前後の人だけでなく、現在無職の人、年金生活中の人、専業主婦・専業主夫の人、配偶者の退職に関係する人について、申請・届出・請求・加入・切替など実際に必要になりそうな手続きだけを整理します。</p>
   </header>
 
   <div class="notice">
@@ -134,10 +134,10 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
   <main>
     <section id="intro" class="panel">
       <h2>このアプリでできること</h2>
-      <p>退職、健康保険、雇用保険、年金、税金、企業年金、65歳・70歳・75歳の節目、医療・介護、相続などを確認します。結果は制度上の確定判定ではなく、窓口へ確認するためのチェックリストです。</p>
+      <p>退職前後の手続きに加えて、現在無職の人、年金生活中の人、専業主婦・専業主夫の人、配偶者の退職にあわせて確認したい人が、健康保険、年金、税金、医療・介護などで必要になりそうな手続きを整理できます。結果は制度上の確定判定ではなく、申請・届出・請求・加入・切替などの漏れを防ぐためのチェックリストです。</p>
       <ul>
         <li>回答に応じて不要な項目を除外します。</li>
-        <li>「分からない」と答えた項目は、確認事項として一覧に残します。</li>
+        <li>「分からない」と答えたものは、原則として手続き一覧には入れず、未確定欄に出します。</li>
         <li>サマリー印刷、詳細一覧印刷、回答データ保存、保存データからの再開ができます。</li>
       </ul>
       <div class="summary-box">
@@ -166,52 +166,50 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
       <div id="errorBox" class="error-box hidden"></div>
       <form id="wizardForm" novalidate>
         <section class="step" data-step="0">
-          <h2 class="step-title">1．本人と世帯</h2><p class="step-lead">年齢の節目と、世帯で判定される制度を整理します。</p>
+          <h2 class="step-title">1．本人と世帯</h2><p class="step-lead">年齢の節目と、本人・配偶者・扶養家族に関係する手続きを整理します。</p>
           <div class="grid">
-            <div class="field"><label for="birthYear">生まれ年（任意）</label><input type="number" min="1900" max="2100" step="1" id="birthYear" inputmode="numeric" placeholder="例：1965"><span class="help">65歳・75歳など、年齢によって変わる確認項目を整理するために使います。正確な生年月日は不要です。</span></div>
+            <div class="field"><label for="birthYear">生まれ年（任意）</label><input type="number" min="1900" max="2100" step="1" id="birthYear" inputmode="numeric" placeholder="例：1965"><span class="help">65歳・75歳など、年齢によって変わる手続きを整理するために使います。正確な生年月日は不要です。</span></div>
             <div class="field"><label for="birthMonth">誕生月（任意）</label><select id="birthMonth"><option value="">選択しない</option><option value="1">1月</option><option value="2">2月</option><option value="3">3月</option><option value="4">4月</option><option value="5">5月</option><option value="6">6月</option><option value="7">7月</option><option value="8">8月</option><option value="9">9月</option><option value="10">10月</option><option value="11">11月</option><option value="12">12月</option></select><span class="help">誕生月まで入れると、65歳・75歳になる月の目安を表示できます。入力したくない場合は空欄でかまいません。</span></div>
             <div class="field"><label for="household">現在の世帯<span class="req">必須</span></label><select id="household" required><option value="">選択してください</option><option value="single">単身</option><option value="couple">夫婦のみ</option><option value="family">配偶者・子などと同居</option><option value="other">その他</option></select></div>
-            <div class="field conditional spouse-field hidden"><label for="spouseBirthYear">配偶者の生まれ年（任意）</label><input type="number" min="1900" max="2100" step="1" id="spouseBirthYear" inputmode="numeric" placeholder="例：1966"><span class="help">加給年金、配偶者の年金切替え確認の目安に使います。</span></div>
+            <div class="field conditional spouse-field hidden"><label for="spouseBirthYear">配偶者の生まれ年（任意）</label><input type="number" min="1900" max="2100" step="1" id="spouseBirthYear" inputmode="numeric" placeholder="例：1966"><span class="help">配偶者に関係する年金手続きの目安に使います。</span></div>
             <div class="field conditional spouse-field hidden"><label for="spouseBirthMonth">配偶者の誕生月（任意）</label><select id="spouseBirthMonth"><option value="">選択しない</option><option value="1">1月</option><option value="2">2月</option><option value="3">3月</option><option value="4">4月</option><option value="5">5月</option><option value="6">6月</option><option value="7">7月</option><option value="8">8月</option><option value="9">9月</option><option value="10">10月</option><option value="11">11月</option><option value="12">12月</option></select><span class="help">正確な生年月日は不要です。入力したくない場合は空欄でかまいません。</span></div>
-            <div class="field"><span class="legend">同じ住民票上の世帯に、住民税が課税されている人がいますか</span><div class="radio-row" data-required-radio="taxableHousehold"><label class="choice"><input type="radio" name="taxableHousehold" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="taxableHousehold" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="taxableHousehold" value="unknown"><span>分からない</span></label></div></div>
             <div class="field full"><span class="legend">健康保険の扶養に入っている家族がいますか</span><div class="radio-row" data-required-radio="hasDependents"><label class="choice"><input type="radio" name="hasDependents" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="hasDependents" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="hasDependents" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="1">
-          <h2 class="step-title">2．仕事と退職</h2><p class="step-lead">退職日と、退職後に働くかどうかで手続きが大きく変わります。</p>
+          <h2 class="step-title">2．現在の状況</h2><p class="step-lead">これから退職する人だけでなく、すでに無職の人、年金生活中の人、専業主婦・専業主夫の人、配偶者の退職にあわせて確認したい人も選べます。</p>
           <div class="grid">
-            <div class="field"><label for="workStatus">現在の状況<span class="req">必須</span></label><select id="workStatus" required><option value="">選択してください</option><option value="employee">会社員・公務員で在職中</option><option value="retired">すでに退職した</option><option value="self">自営業・フリーランス</option><option value="notworking">現在働いていない</option></select></div>
-            <div class="field conditional retirement-date-field hidden"><label for="retirementDate">退職予定日または退職日<span class="req">該当時必須</span></label><input type="date" id="retirementDate"><span class="help">未定なら、おおよその予定日を入力できます。</span></div>
-            <div class="field conditional employment-field hidden"><label for="postWork">退職後の働き方<span class="req">必須</span></label><select id="postWork"><option value="">選択してください</option><option value="none">働かない</option><option value="reemploy">再雇用・継続雇用</option><option value="newjob">別の会社で働く</option><option value="self">自営業・業務委託</option><option value="undecided">未定</option></select></div>
+            <div class="field"><label for="workStatus">現在の状況<span class="req">必須</span></label><select id="workStatus" required><option value="">選択してください</option><option value="employee">これから退職予定（会社員・公務員など）</option><option value="retired">退職したばかり</option><option value="notworking">すでに無職</option><option value="pensioner">年金を受け取り始めている</option><option value="homemaker">専業主婦・専業主夫</option><option value="spouse_retire">配偶者の退職にあわせて確認したい</option><option value="self">自営業・フリーランス</option></select><span class="help">会社を退職する人以外も使えます。該当するものがなければ、近いものを選んでください。</span></div>
+            <div class="field conditional retirement-date-field hidden"><label for="retirementDate">本人または配偶者の退職予定日・退職日<span class="req">該当時必須</span></label><input type="date" id="retirementDate"><span class="help">未定なら、おおよその予定日を入力できます。すでに無職・年金生活中・専業主婦/主夫の場合は入力不要です。</span></div>
+            <div class="field conditional employment-field hidden"><label for="postWork">本人の退職後の働き方<span class="req">必須</span></label><select id="postWork"><option value="">選択してください</option><option value="none">働かない</option><option value="reemploy">再雇用・継続雇用</option><option value="newjob">別の会社で働く</option><option value="self">自営業・業務委託</option><option value="undecided">未定</option></select></div>
             <div class="field conditional employment-field hidden"><span class="legend">ハローワークで求職する予定ですか</span><div class="radio-row" data-required-radio="jobSearch"><label class="choice"><input type="radio" name="jobSearch" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="jobSearch" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="jobSearch" value="unknown"><span>未定</span></label></div></div>
             <div class="field conditional employment-field hidden"><span class="legend">60歳以降の賃金は、60歳時点より大きく下がりますか</span><div class="radio-row"><label class="choice"><input type="radio" name="wageDrop" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="wageDrop" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="wageDrop" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="2">
-          <h2 class="step-title">3．退職後の健康保険</h2><p class="step-lead">退職後の健康保険は自動では決まりません。</p>
+          <h2 class="step-title">3．健康保険</h2><p class="step-lead">選んだ内容に応じて、加入・切替・扶養申請などの実際の手続きを一覧に出します。</p>
           <div class="grid">
             <div class="field"><label for="currentInsurance">現在の健康保険<span class="req">必須</span></label><select id="currentInsurance" required><option value="">選択してください</option><option value="employee">勤務先の健康保険・共済</option><option value="nhi">国民健康保険</option><option value="dependent">家族の健康保険の扶養</option><option value="late">後期高齢者医療</option><option value="unknown">分からない</option></select></div>
-            <div class="field"><label for="healthPlan">退職後に予定している健康保険<span class="req">必須</span></label><select id="healthPlan" required><option value="">選択してください</option><option value="voluntary">任意継続</option><option value="nhi">国民健康保険</option><option value="dependent">家族の扶養</option><option value="newjob">新しい勤務先の健康保険</option><option value="keep">現在のまま</option><option value="undecided">未定・比較していない</option></select></div>
+            <div class="field"><label for="healthPlan">退職後・今後の健康保険をどうしますか<span class="req">必須</span></label><select id="healthPlan" required><option value="">選択してください</option><option value="voluntary">任意継続にする</option><option value="nhi">国民健康保険に入る</option><option value="dependent">家族の健康保険の扶養に入る</option><option value="newjob">再就職先の健康保険に入る</option><option value="keep">現在のまま</option><option value="undecided">まだ決めていない</option></select></div>
             <div class="field"><span class="legend">マイナ保険証を利用していますか</span><div class="radio-row" data-required-radio="mynaInsurance"><label class="choice"><input type="radio" name="mynaInsurance" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="mynaInsurance" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="mynaInsurance" value="unknown"><span>分からない</span></label></div></div>
             <div class="field conditional disability-late-field hidden"><span class="legend">65～74歳で、一定の障害認定を受けていますか</span><div class="radio-row" data-required-radio="disabilityLateMedical"><label class="choice"><input type="radio" name="disabilityLateMedical" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="disabilityLateMedical" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="disabilityLateMedical" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="3">
-          <h2 class="step-title">4．公的年金</h2><p class="step-lead">受給開始時期と就労予定を確認します。</p>
+          <h2 class="step-title">4．公的年金</h2><p class="step-lead">受給開始時期と就労予定に応じて、必要な年金手続きを出します。</p>
           <div class="grid">
             <div class="field"><label for="pensionStart">老齢年金の状況<span class="req">必須</span></label><select id="pensionStart" required><option value="">選択してください</option><option value="undecided">まだ決めていない</option><option value="early">65歳前の繰上げを予定</option><option value="normal">65歳から受給予定</option><option value="delay">66歳以降へ繰下げ予定</option><option value="receiving">すでに受給中</option><option value="unknown">受給資格・状況が分からない</option></select></div>
             <div class="field conditional planned-age-field hidden"><label for="plannedPensionAge">予定している受給開始年齢</label><input type="number" min="60" max="75" step="1" id="plannedPensionAge" placeholder="例：70"></div>
             <div class="field"><span class="legend">65歳以降も厚生年金に加入して働く予定ですか</span><div class="radio-row" data-required-radio="workAfter65"><label class="choice"><input type="radio" name="workAfter65" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="workAfter65" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="workAfter65" value="unknown"><span>未定</span></label></div></div>
-            <div class="field"><span class="legend">年金記録を「ねんきんネット」などで確認済みですか</span><div class="radio-row" data-required-radio="pensionRecordChecked"><label class="choice"><input type="radio" name="pensionRecordChecked" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="pensionRecordChecked" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="pensionRecordChecked" value="unknown"><span>分からない</span></label></div></div>
-            <div class="field"><span class="legend">年金額が少なく、世帯全員が住民税非課税になる可能性がありますか</span><div class="radio-row" data-required-radio="lowPension"><label class="choice"><input type="radio" name="lowPension" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="lowPension" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="lowPension" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">年金生活者支援給付金の請求書・案内が届いていますか</span><span class="help">手続き用のはがきや案内が届いている場合だけ「はい」。届いていなければ「いいえ」。</span><div class="radio-row" data-required-radio="lowPension"><label class="choice"><input type="radio" name="lowPension" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="lowPension" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="lowPension" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="4">
-          <h2 class="step-title">5．退職金・企業年金</h2><p class="step-lead">勤務先独自の制度は、自分で申し込まないと移換や請求が必要な場合があります。</p>
+          <h2 class="step-title">5．退職金・企業年金など</h2><p class="step-lead">会社員時代の制度がある人向けです。ずっと専業主婦・専業主夫などで該当しない場合は「いいえ」を選んでください。</p>
           <div class="grid">
             <div class="field"><span class="legend">退職金を受け取る予定がありますか</span><div class="radio-row" data-required-radio="retirementPay"><label class="choice"><input type="radio" name="retirementPay" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="retirementPay" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="retirementPay" value="unknown"><span>分からない</span></label></div></div>
             <div class="field"><span class="legend">企業年金・厚生年金基金がありますか</span><div class="radio-row" data-required-radio="companyPension"><label class="choice"><input type="radio" name="companyPension" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="companyPension" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="companyPension" value="unknown"><span>分からない</span></label></div></div>
@@ -222,32 +220,30 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
         </section>
 
         <section class="step hidden" data-step="5">
-          <h2 class="step-title">6．退職後の税金・医療費・住民税の確認</h2><p class="step-lead">ここでは、退職した年から年金生活に入った後まで、毎年確認した方がよい税金・医療費・住民税の項目を確認します。現時点で分からない場合は「分からない」を選んでください。結果一覧に「確認すること」として残します。</p>
+          <h2 class="step-title">6．税金・医療費</h2><p class="step-lead">ここでは、確定申告・還付申告と、すでに発生した医療費・民間保険の手続きだけを整理します。将来の病気を予測させる質問は使いません。</p>
           <div class="grid">
-            <div class="field"><span class="legend">退職後または年金生活中に、年金以外の収入もありますか</span><span class="help">例：給与、副業、事業収入、不動産収入、個人年金など。年金だけなら「いいえ」。未定なら「分からない」。</span><div class="radio-row" data-required-radio="multipleIncome"><label class="choice"><input type="radio" name="multipleIncome" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="multipleIncome" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="multipleIncome" value="unknown"><span>分からない</span></label></div></div>
-            <div class="field"><span class="legend">今年または退職後に、医療費が多くなりそうですか</span><span class="help">医療費控除や高額療養費の確認が必要かを見る質問です。入院・手術・高額な通院や薬代の予定があれば「はい」。</span><div class="radio-row" data-required-radio="highMedical"><label class="choice"><input type="radio" name="highMedical" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="highMedical" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="highMedical" value="unknown"><span>分からない</span></label></div></div>
-            <div class="field"><span class="legend">今年または退職後に、確定申告が必要そうな出来事がありますか</span><span class="help">例：ふるさと納税、寄附、住宅売却、医療費控除、退職金の申告確認など。なければ「いいえ」。</span><div class="radio-row" data-required-radio="specialTax"><label class="choice"><input type="radio" name="specialTax" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="specialTax" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="specialTax" value="unknown"><span>分からない</span></label></div></div>
-            <div class="field"><span class="legend">直近の住民税通知で、本人と世帯の課税状況を確認しましたか</span><span class="help">住民税決定通知書や自治体窓口で確認済みなら「はい」。見ていない、世帯の課税状況が分からない場合は「いいえ」または「分からない」。</span><div class="radio-row" data-required-radio="residentTaxChecked"><label class="choice"><input type="radio" name="residentTaxChecked" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="residentTaxChecked" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="residentTaxChecked" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">現在または今後、年金以外の収入もありますか</span><span class="help">例：給与、副業、事業収入、不動産収入、個人年金など。年金だけなら「いいえ」。未定なら「分からない」。</span><div class="radio-row" data-required-radio="multipleIncome"><label class="choice"><input type="radio" name="multipleIncome" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="multipleIncome" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="multipleIncome" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">健康保険で、高額療養費・限度額適用認定などの申請が必要ですか</span><span class="help">入院・手術・高額な受診などで、加入している健康保険者へ申請する手続きが必要な場合だけ「はい」。所得税の還付申告だけなら「いいえ」。</span><div class="radio-row" data-required-radio="medicalInsuranceNeed"><label class="choice"><input type="radio" name="medicalInsuranceNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="medicalInsuranceNeed" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="medicalInsuranceNeed" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">医療費控除またはセルフメディケーション税制の申告をする予定がありますか</span><span class="help">所得税の確定申告・還付申告として医療費関係を申告する場合だけ「はい」。健康保険の高額療養費とは別の手続きです。</span><div class="radio-row" data-required-radio="medicalTaxNeed"><label class="choice"><input type="radio" name="medicalTaxNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="medicalTaxNeed" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="medicalTaxNeed" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">今年、確定申告・還付申告につながる出来事がありましたか</span><span class="help">例：ふるさと納税、寄附、住宅売却、退職金関係の申告、年金以外の所得など。なければ「いいえ」。</span><div class="radio-row" data-required-radio="specialTax"><label class="choice"><input type="radio" name="specialTax" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="specialTax" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="specialTax" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="6">
-          <h2 class="step-title">7．医療・介護・障害の確認</h2><p class="step-lead">ここでは、今すぐ必要な医療・介護・障害関係の手続きと、将来発生したときに確認したい項目を選びます。現在は不要でも、将来の備えとして一覧に残したい場合は「今は不要だが一覧に残す」を選んでください。</p>
+          <h2 class="step-title">7．医療・介護・障害</h2><p class="step-lead">ここでは、今すぐ申請・請求につながる可能性がある医療・介護・障害関係の手続きを選びます。将来の備えだけの項目は一覧に出しません。</p>
           <div class="grid">
-            <div class="field"><span class="legend">今、本人または家族に介護サービスが必要ですか</span><span class="help">要介護・要支援認定、地域包括支援センター、ケアマネジャー、介護費の軽減などを一覧に出すための質問です。</span><div class="radio-row" data-required-radio="careNeed"><label class="choice"><input type="radio" name="careNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="careNeed" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="careNeed" value="future"><span>今は不要だが一覧に残す</span></label></div></div>
-            <div class="field"><span class="legend">今、病気や障害で仕事や日常生活に大きな制限がありますか</span><span class="help">障害年金、障害者手帳、自立支援医療、傷病手当金などを一覧に出すための質問です。</span><div class="radio-row" data-required-radio="disabilityNeed"><label class="choice"><input type="radio" name="disabilityNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="disabilityNeed" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="disabilityNeed" value="future"><span>今は不要だが一覧に残す</span></label></div></div>
-            <div class="field"><span class="legend">入院・手術・がん治療などに備えた民間保険に加入していますか</span><span class="help">保険証券の確認や、入院・手術・通院・がん診断時の給付金請求を一覧に出すための質問です。</span><div class="radio-row" data-required-radio="privateMedical"><label class="choice"><input type="radio" name="privateMedical" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="privateMedical" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="privateMedical" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">介護保険サービスを使う必要がありますか</span><span class="help">要介護・要支援認定の申請につながる場合だけ「はい」。将来の不安だけなら「いいえ」。</span><div class="radio-row" data-required-radio="careNeed"><label class="choice"><input type="radio" name="careNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="careNeed" value="no"><span>いいえ</span></label></div></div>
+            <div class="field"><span class="legend">介護保険施設やショートステイの食費・居住費の負担軽減を申請したいですか</span><span class="help">負担限度額認定の申請につながる場合だけ「はい」。施設入所予定そのものではなく、申請したい手続きとして判定します。</span><div class="radio-row" data-required-radio="careLimit"><label class="choice"><input type="radio" name="careLimit" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="careLimit" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="careLimit" value="unknown"><span>分からない</span></label></div></div>
+            <div class="field"><span class="legend">今、病気や障害で仕事や日常生活に大きな制限がありますか</span><span class="help">障害年金、障害者手帳、自立支援医療、傷病手当金などの申請・請求候補を一覧に出すための質問です。</span><div class="radio-row" data-required-radio="disabilityNeed"><label class="choice"><input type="radio" name="disabilityNeed" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="disabilityNeed" value="no"><span>いいえ</span></label></div></div>
+            <div class="field"><span class="legend">入院・手術・通院などで、民間保険の給付請求が必要ですか</span><span class="help">実際に請求できそうな入院・手術・通院などがある場合だけ「はい」。加入しているだけなら「いいえ」。</span><div class="radio-row" data-required-radio="privateMedical"><label class="choice"><input type="radio" name="privateMedical" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="privateMedical" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="privateMedical" value="unknown"><span>分からない</span></label></div></div>
           </div>
         </section>
 
         <section class="step hidden" data-step="7">
-          <h2 class="step-title">8．暮らしと将来のイベント</h2><p class="step-lead">運転、住まい、認知症への備え、家族が亡くなった場合の手続きを追加します。</p>
+          <h2 class="step-title">8．運転免許</h2><p class="step-lead">ここでは、老後に年齢で発生する運転免許関係の予約・検査だけを扱います。引っ越し、遺言、家族死亡などの一般手続きはこのアプリから外しています。</p>
           <div class="grid">
             <div class="field"><span class="legend">運転免許を持っていますか</span><div class="radio-row" data-required-radio="driver"><label class="choice"><input type="radio" name="driver" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="driver" value="no"><span>いいえ</span></label></div></div>
-            <div class="field"><span class="legend">引越し・住み替え・施設入所の予定がありますか</span><div class="radio-row" data-required-radio="movePlan"><label class="choice"><input type="radio" name="movePlan" value="yes"><span>はい</span></label><label class="choice"><input type="radio" name="movePlan" value="no"><span>いいえ</span></label><label class="choice"><input type="radio" name="movePlan" value="unknown"><span>未定</span></label></div></div>
-            <div class="field"><span class="legend">遺言・財産一覧・任意後見などの準備項目を含めますか</span><div class="radio-row" data-required-radio="futurePrep"><label class="choice"><input type="radio" name="futurePrep" value="yes"><span>含める</span></label><label class="choice"><input type="radio" name="futurePrep" value="no"><span>含めない</span></label></div></div>
-            <div class="field"><span class="legend">家族が亡くなった場合の手続きも一覧に含めますか</span><div class="radio-row" data-required-radio="bereavement"><label class="choice"><input type="radio" name="bereavement" value="yes"><span>含める</span></label><label class="choice"><input type="radio" name="bereavement" value="no"><span>含めない</span></label></div></div>
-            <div class="field full"><label for="userMemo">全体メモ（任意）</label><textarea id="userMemo" placeholder="例：退職前に会社の人事へ企業年金を確認する"></textarea></div>
+            <div class="field full"><label for="userMemo">全体メモ（任意）</label><textarea id="userMemo" placeholder="例：年金事務所に年金記録を確認する"></textarea></div>
           </div>
         </section>
       </form>
@@ -255,14 +251,14 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
     </section>
 
     <section id="confirm" class="panel hidden">
-      <h2>回答内容の確認</h2>
-      <p>手続きの判定に大きく影響する回答です。修正する場合は「質問に戻る」を押してください。</p>
+      <h2>回答内容</h2>
+      <p>手続きの抽出に大きく影響する回答です。修正する場合は「質問に戻る」を押してください。</p>
       <dl id="confirmSummary" class="summary-grid"></dl>
       <div class="actions"><button class="btn btn-secondary" id="backToWizardBtn">質問に戻る</button><button class="btn btn-primary" id="generateBtn">手続き一覧を作成</button></div>
     </section>
 
     <section id="results" class="panel hidden">
-      <h2>手続き・確認事項</h2>
+      <h2>必要な手続き</h2>
       <div class="result-toolbar">
         <span class="counter" id="taskCounter"></span>
         <button class="btn btn-small btn-secondary" id="showIncompleteBtn">未完了だけ表示</button>
@@ -272,10 +268,11 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
         <button class="btn btn-small btn-secondary" id="saveBtn">回答データ保存</button>
       </div>
       <div class="lock-note">印刷はA4縦を前提にしています。PDFとして残したい場合は、ブラウザの印刷画面で「PDFに保存」または「Microsoft Print to PDF」を選んでください。項目数が多い場合は、サマリーが2ページ以上になることがあります。詳細一覧印刷では、完了チェック済みの項目は印刷されません。</div>
-      <div class="tabs"><button class="tab active" data-tab="personal">あなたの一覧</button><button class="tab" data-tab="catalog">全イベント・手続き一覧</button><button class="tab" data-tab="disclaimer">免責・使い方</button></div>
+      <div id="unresolvedBox" class="notice hidden"><strong>未確定のため、手続き一覧に入れていないもの</strong><ul id="unresolvedList"></ul></div>
+      <div class="tabs"><button class="tab active" data-tab="personal">あなたの一覧</button><button class="tab" data-tab="disclaimer">免責・使い方</button></div>
       <div id="tab-personal" class="tab-panel">
         <div class="filter-row"><input type="search" id="taskSearch" placeholder="手続き名・窓口・理由を検索"><select id="priorityFilter"><option value="all">優先度：すべて</option><option value="high">優先度：高</option><option value="mid">優先度：中</option><option value="low">優先度：低</option></select></div>
-        <div class="completion-guide"><strong>「完了」チェックの使い方：</strong>実際に確認や手続きが済んだ項目にチェックします。印刷対象を選ぶ機能ではありません。詳細一覧印刷では、完了チェック済みの項目は印刷されません。完了状態は「回答データ保存」に含まれ、次回読み込んだときに復元されます。</div><div class="completion-guide"><strong>メモ欄の注意：</strong>メモ欄にも、氏名、住所、マイナンバー、基礎年金番号、銀行口座番号など、本人を特定できる情報や重要な番号は入力しないでください。</div>
+        <div class="completion-guide"><strong>「完了」チェックの使い方：</strong>実際に手続きが済んだ項目にチェックします。印刷対象を選ぶ機能ではありません。詳細一覧印刷では、完了チェック済みの項目は印刷されません。完了状態は「回答データ保存」に含まれ、次回読み込んだときに復元されます。</div><div class="completion-guide"><strong>メモ欄の注意：</strong>メモ欄にも、氏名、住所、マイナンバー、基礎年金番号、銀行口座番号など、本人を特定できる情報や重要な番号は入力しないでください。</div>
         <section id="taskSummary" class="task-summary">
           <div class="task-summary-head"><div><h3>サマリー</h3><p>必要になりそうな項目を「時期・内容・窓口」の3項目で表示します。行を押すと、下の詳細へ移動します。</p></div><span class="summary-help" id="summaryMeta"></span></div>
           <div class="summary-head-row" aria-hidden="true"><span>いつ</span><span>何を</span><span>どこで</span></div>
@@ -283,14 +280,9 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
         </section>
         <div id="taskGroups"></div>
       </div>
-      <div id="tab-catalog" class="tab-panel hidden">
-        <div class="filter-row"><input type="search" id="catalogSearch" placeholder="全一覧を検索"><select id="catalogCategory"><option value="all">区分：すべて</option></select></div>
-        <p>全国共通制度だけでなく、自治体・健康保険組合・勤務先で確認する項目も含みます。ここにある全項目が、すべての人に必要という意味ではありません。</p>
-        <div class="catalog-list" id="catalogList"></div>
-      </div>
       <div id="tab-disclaimer" class="tab-panel hidden">
         <h3>免責事項</h3>
-        <p>このアプリは、退職後や老後に発生する可能性がある手続き・確認事項を整理するためのものです。申請資格、受給額、税額、保険料、手続き期限、審査結果を保証するものではありません。</p>
+        <p>このアプリは、退職前後、無職期間、年金生活、専業主婦・専業主夫、配偶者の退職などで発生する可能性がある申請・届出・請求・加入・切替・脱退などの手続きを整理するためのものです。申請資格、受給額、税額、保険料、手続き期限、審査結果を保証するものではありません。</p>
         <p>制度は法改正や自治体・保険者・勤務先の規定によって変わります。実際の手続きは、市区町村、年金事務所、ハローワーク、税務署、加入している健康保険、勤務先、金融機関などの最新案内で確認してください。</p>
         <p>入力した回答内容やメモは、アプリから外部へ送信しません。ただし、GitHub Pagesでアプリ画面を開く通信、公式確認先リンクを開く通信は発生します。利用者が印刷・保存したファイルや紙面の管理は利用者自身の責任となります。共用パソコンでは保存しないでください。</p>
         <h3>使い方の注意</h3><p>保存データには回答、完了チェック、メモが含まれます。保存ファイルは暗号化されず、メモ帳などで内容を確認できます。手で編集すると読み込めなくなる場合があります。共用端末では保存せず、保存したファイルは利用者自身で管理してください。公式確認先リンクを開くと、外部サイトへ移動します。</p>
@@ -299,13 +291,13 @@ input:focus,select:focus,textarea:focus,button:focus{outline:3px solid var(--foc
       <div class="actions"><button class="btn btn-danger" id="resetBtn">入力内容を全消去</button><button class="btn btn-secondary" id="editAnswersBtn">回答を修正</button></div>
     </section>
   </main>
-  <div class="footer">© 2026 退職・老後の手続きチェックナビ　｜　作成基準日：2026年6月12日　｜　制度の最終確認は必ず公的機関で行ってください。</div>
+  <div class="footer">© 2026 60代からの手続き漏れチェックナビ　｜　作成基準日：2026年6月13日　｜　制度の最終確認は必ず公的機関で行ってください。</div>
 </div>
 
 <script>
 'use strict';
-const APP_VERSION='1.8.0';
-let currentStep=0, generatedTasks=[], showIncompleteOnly=false;
+const APP_VERSION='2.5.0';
+let currentStep=0, generatedTasks=[], generatedWarnings=[], showIncompleteOnly=false;
 const answers={};
 const completion={}, notes={};
 
@@ -326,7 +318,7 @@ function labelOf(id){const el=$('#'+id);return el?.options?.[el.selectedIndex]?.
 
 function updateConditional(){
  const ws=$('#workStatus').value;
- $$('.retirement-date-field').forEach(e=>e.classList.toggle('hidden',!['employee','retired'].includes(ws)));
+ $$('.retirement-date-field').forEach(e=>e.classList.toggle('hidden',!['employee','retired','spouse_retire'].includes(ws)));
  $$('.employment-field').forEach(e=>e.classList.toggle('hidden',!['employee','retired'].includes(ws)));
  $$('.spouse-field').forEach(e=>e.classList.toggle('hidden',!['couple','family'].includes($('#household').value)));
  $$('.planned-age-field').forEach(e=>e.classList.toggle('hidden',!['early','delay'].includes($('#pensionStart').value)));
@@ -347,8 +339,11 @@ function visibleRequiredValid(){
  step.querySelectorAll('[required]').forEach(el=>{if(el.closest('.hidden'))return;if(!el.value)errors.push(el.previousElementSibling?.textContent?.replace('必須','')||'必須項目');});
  step.querySelectorAll('[data-required-radio]').forEach(box=>{if(box.closest('.hidden'))return;const n=box.dataset.requiredRadio;if(!radio(n))errors.push(box.previousElementSibling?.textContent||n);});
  if(currentStep===1&&['employee','retired'].includes($('#workStatus').value)){
-   if(!$('#retirementDate').value)errors.push('退職予定日または退職日');
-   if(!$('#postWork').value)errors.push('退職後の働き方');
+   if(!$('#retirementDate').value)errors.push('本人の退職予定日または退職日');
+   if(!$('#postWork').value)errors.push('本人の退職後の働き方');
+ }
+ if(currentStep===1&&$('#workStatus').value==='spouse_retire'&&!$('#retirementDate').value){
+   errors.push('配偶者の退職予定日または退職日');
  }
  if(errors.length){$('#errorBox').innerHTML='<strong>未回答があります。</strong><br>'+errors.map(esc).join('、');$('#errorBox').classList.remove('hidden');return false;}return true;
 }
@@ -358,13 +353,13 @@ function collectAnswers(){
  ids.forEach(id=>answers[id]=$('#'+id)?.value||'');
  answers.birthDate=makeApproxDate(answers.birthYear,answers.birthMonth);
  answers.spouseBirth=makeApproxDate(answers.spouseBirthYear,answers.spouseBirthMonth);
- ['taxableHousehold','hasDependents','jobSearch','wageDrop','mynaInsurance','disabilityLateMedical','workAfter65','pensionRecordChecked','lowPension','retirementPay','companyPension','corporateDc','ideco','companyBenefits','multipleIncome','highMedical','specialTax','residentTaxChecked','careNeed','disabilityNeed','privateMedical','driver','movePlan','futurePrep','bereavement'].forEach(n=>answers[n]=radio(n));
+ ['hasDependents','jobSearch','wageDrop','mynaInsurance','disabilityLateMedical','workAfter65','lowPension','retirementPay','companyPension','corporateDc','ideco','companyBenefits','multipleIncome','medicalInsuranceNeed','medicalTaxNeed','specialTax','careNeed','careLimit','disabilityNeed','privateMedical','driver'].forEach(n=>answers[n]=radio(n));
 }
 
 function confirmSummary(){collectAnswers();const r=answers.retirementDate, age=r&&answers.birthDate?ageAt(answers.birthDate,r):null, ageRange=r?ageRangeAt(answers.birthYear,answers.birthMonth,r):null;
  const ageLabel=age!==null?`${age}歳前後`:(ageRange?`${ageRange.min}〜${ageRange.max}歳前後（月未入力）`:'年齢に関係する項目は要確認');
  const items=[
- ['生まれ年・誕生月',approxBirthLabel(answers.birthYear,answers.birthMonth)],['世帯',labelOf('household')],['現在の状況',labelOf('workStatus')],['退職日',r?fmt(r):'該当なし・未設定'],['退職時年齢の目安',ageLabel],['退職後の働き方',answers.postWork?labelOf('postWork'):'—'],['退職後の健康保険',labelOf('healthPlan')],['年金の状況',labelOf('pensionStart')],['企業型DC',answers.corporateDc||'—'],['介護項目',answers.careNeed||'—'],['相続準備',answers.futurePrep||'—']
+ ['生まれ年・誕生月',approxBirthLabel(answers.birthYear,answers.birthMonth)],['世帯',labelOf('household')],['現在の状況',labelOf('workStatus')],['退職日',r?fmt(r):'該当なし・未設定'],['退職時年齢の目安',ageLabel],['本人の退職後の働き方',answers.postWork?labelOf('postWork'):'—'],['健康保険の予定',labelOf('healthPlan')],['年金の状況',labelOf('pensionStart')],['企業型DC',answers.corporateDc||'—'],['介護サービス',answers.careNeed||'—'],['負担限度額認定',answers.careLimit||'—']
  ];$('#confirmSummary').innerHTML=items.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');}
 
 function task(o){return Object.assign({id:'t'+Math.random().toString(36).slice(2),category:'その他',timing:'随時',priority:'mid',deadline:'',office:'',docs:'',reason:'',sourceName:'',sourceUrl:'',date:'',sort:900},o);}
@@ -375,19 +370,22 @@ function buildTasks(a){
   if(retAge!==null&&retAge<60){retUnder60=true;retUnder60Reason=`退職時年齢が${retAge}歳で、60歳未満のため。`;}
   else if(retAge===null){
    if(retAgeRange&&retAgeRange.max<60){retUnder60=true;retUnder60Reason=`生まれ年から見ると退職時年齢は${retAgeRange.min}〜${retAgeRange.max}歳前後で、60歳未満と考えられるため。`;}
-   else if(retAgeRange&&retAgeRange.min<60){retUnder60=true;retUnder60Reason='誕生月が未入力のため、退職時点で60歳未満の可能性があります。国民年金への切替えが必要か確認してください。';}
-   else if(!retAgeRange){retUnder60=true;retUnder60Reason='生まれ年・誕生月が未入力のため、退職時に60歳未満か確認が必要です。';}
+   else if(retAgeRange&&retAgeRange.min<60){retUnder60=false;}
+   else if(!retAgeRange){retUnder60=false;}
   }
  }
  const isRetAge65Plus=retAge!==null?retAge>=65:(retAgeRange?retAgeRange.max>=65:false);
  const isRetAge65Ambiguous=retAge===null&&(!retAgeRange||retAgeRange.min<65&&retAgeRange.max>=65);
+ const isLeavingJob=['employee','retired'].includes(a.workStatus);
+ const isSpouseRetire=a.workStatus==='spouse_retire';
+ const hasR=r||isLeavingJob||isSpouseRetire;
  const S={
   pension:'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/index.html',
-  pensionJoin:'https://www.nenkin.go.jp/service/kokunen/kanyu/20140710-04.html',
+  pensionJoin:'https://www.nenkin.go.jp/service/kokunen/kanyu/20140710-03.html',
   pensionEarly:'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-01.html',
   pensionDelay:'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-02.html',
   pensionSupport:'https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin.html',
-  voluntary:'https://www.kyoukaikenpo.or.jp/g3/sb3270/r147/',
+  voluntary:'https://www.kyoukaikenpo.or.jp/benefit/voluntary_continuation/',
   hello:'https://www.hellowork.mhlw.go.jp/insurance/insurance_basicbenefit.html',
   continue:'https://www.hellowork.mhlw.go.jp/insurance/insurance_continue.html',
   ideco:'https://www.ideco-koushiki.jp/retirement/',
@@ -400,78 +398,98 @@ function buildTasks(a){
   inheritance:'https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_06_13/index.html'
  };
  const add=o=>t.push(task(o));
- add({id:'record',category:'退職前',timing:'退職前',priority:'high',sort:10,title:'会社から受け取る書類を一覧で確認する',office:'勤務先の人事・総務',docs:'離職票、源泉徴収票、雇用保険被保険者証、健康保険資格喪失証明書、退職証明書、退職金関係書類',reason:'退職後の健康保険、雇用保険、年金、税金の手続きで使うため。'});
- add({id:'pension-record',category:'退職前',timing:'退職前',priority:a.pensionRecordChecked==='yes'?'low':'high',sort:11,title:'年金加入記録と見込額を確認する',office:'ねんきんネット・年金事務所',reason:a.pensionRecordChecked==='yes'?'確認済みのため、記録に変更がないか最終確認します。':'年金記録を未確認または不明と回答したため。',sourceName:'日本年金機構',sourceUrl:S.pension});
- if(['employee','retired'].includes(a.workStatus)){
-  add({id:'health-compare',category:'退職前',timing:'退職前',priority:'high',sort:20,title:'退職後の健康保険を3案で比較する',office:'現在の健康保険、市区町村、家族の勤務先',docs:'退職前の給与、前年所得、扶養家族の情報',reason:`退職後の予定が「${labelOf('healthPlan')}」のため。任意継続・国民健康保険・家族の扶養を金額と条件で比較します。`});
-  add({id:'resident-tax',category:'退職前',timing:'退職前',priority:'high',sort:21,title:'退職後の住民税の支払い方法と残額を確認する',office:'勤務先・市区町村税務窓口',docs:'住民税決定通知書、給与明細',reason:'住民税は前年所得を基に翌年度課税され、退職後に納付書が届く場合があるため。'});
-  if(a.companyBenefits!=='no')add({id:'company-benefits',category:'退職前',timing:'退職前',priority:a.companyBenefits==='yes'?'high':'mid',sort:22,title:'団体保険・財形・持株会・福利厚生の終了または継続を確認する',office:'勤務先の人事・総務',reason:a.companyBenefits==='yes'?'勤務先制度があると回答したため。':'勤務先制度の有無が不明なため。'});
+ if(isLeavingJob){
+  add({id:'record',category:'退職前',timing:'退職前〜退職直後',priority:'high',sort:10,title:'退職後の手続きに使う書類を勤務先から受け取る',office:'勤務先の人事・総務',docs:'離職票、源泉徴収票、雇用保険被保険者証、健康保険資格喪失証明書、退職証明書、退職金関係書類',reason:'健康保険、雇用保険、年金、税金の申請・届出で使うため。'});
+  if(a.companyBenefits==='yes')add({id:'company-benefits',category:'退職前',timing:'退職前',priority:'high',sort:22,title:'団体保険・財形・持株会・福利厚生の継続または終了手続きをする',office:'勤務先の人事・総務',reason:'勤務先制度があると回答したため。退職で資格喪失、解約、継続、移管が必要になる場合があります。'});
  }
- if(a.healthPlan==='voluntary'||a.healthPlan==='undecided')add({id:'voluntary',category:'退職直後',timing:'退職後20日以内',priority:'high',sort:30,title:'健康保険の任意継続を申請する、または期限前に選択を確定する',date:r?addDays(r,20):'',deadline:r?`${fmt(addDays(r,20))}までを目安に保険者へ確認`:'資格喪失日から20日以内',office:'退職前の健康保険者',docs:'申出書、退職日が確認できる書類など',reason:a.healthPlan==='voluntary'?'任意継続を予定しているため。':'退職後の健康保険が未定のため、期限の短い任意継続を先に確認します。',sourceName:'協会けんぽ',sourceUrl:S.voluntary});
- if(a.healthPlan==='nhi'||a.healthPlan==='undecided')add({id:'nhi',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:31,title:'国民健康保険への加入手続きと保険料を確認する',deadline:'原則14日以内。自治体で確認',office:'市区町村の国民健康保険窓口',docs:'健康保険資格喪失証明書、本人確認書類など',reason:a.healthPlan==='nhi'?'国民健康保険を予定しているため。':'退職後の健康保険が未定のため。'});
- if(a.healthPlan==='dependent'||a.healthPlan==='undecided')add({id:'dependent',category:'退職直後',timing:'退職前～退職直後',priority:'high',sort:32,title:'家族の健康保険の被扶養者になれるか確認する',office:'家族の勤務先・健康保険組合',docs:'退職証明書、収入見込、年金・失業給付の資料など',reason:a.healthPlan==='dependent'?'家族の扶養を予定しているため。':'退職後の健康保険が未定のため。'});
- if(a.hasDependents!=='no'&&['employee','retired'].includes(a.workStatus))add({id:'dependent-family',category:'退職直後',timing:'退職前～退職直後',priority:'high',sort:33,title:'現在の扶養家族の健康保険がどう変わるか確認する',office:'現在の健康保険者・市区町村',reason:a.hasDependents==='yes'?'扶養家族がいると回答したため。':'扶養家族の有無が不明なため。'});
- if(a.mynaInsurance!=='yes')add({id:'insurance-card',category:'退職直後',timing:'保険切替後',priority:'mid',sort:34,title:'マイナ保険証の資格情報または資格確認書を確認する',office:'新しい健康保険者',reason:a.mynaInsurance==='no'?'マイナ保険証を利用していないため、資格確認書の扱いを確認します。':'利用状況が不明なため。'});
- if(r&&retUnder60)add({id:'national-pension',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:40,title:'国民年金第1号被保険者への切替えを確認する',deadline:'原則14日以内。市区町村または年金事務所で確認',office:'市区町村国民年金窓口・年金事務所',docs:'資格喪失日を確認できる書類、基礎年金番号確認書類など',reason:retUnder60Reason,sourceName:'日本年金機構',sourceUrl:S.pensionJoin});
- if(r&&retUnder60&&['couple','family'].includes(a.household))add({id:'spouse-pension-switch',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:41,title:'扶養されていた配偶者の国民年金区分変更を確認する',office:'市区町村国民年金窓口・配偶者の勤務先',reason:'本人の退職により、配偶者が第3号被保険者のままではいられない場合があるため。'});
- if(a.jobSearch==='yes')add({id:'unemployment',category:'雇用保険',timing:'離職票受領後',priority:'high',sort:50,title:isRetAge65Ambiguous?'雇用保険の給付内容（基本手当／高年齢求職者給付金）を確認する':isRetAge65Plus?'高年齢求職者給付金の受給資格を確認する':'雇用保険の基本手当を申請する',office:'住所地を管轄するハローワーク',docs:'離職票1・2、本人確認書類、写真、口座確認書類など',reason:isRetAge65Ambiguous?'退職時年齢が65歳前後の可能性があるため、対象になる給付をハローワークで確認します。':isRetAge65Plus?'退職時に65歳以上で求職予定のため。':'求職予定と回答したため。',sourceName:'ハローワーク',sourceUrl:S.hello});
- if(a.jobSearch==='unknown')add({id:'unemployment-check',category:'雇用保険',timing:'退職前',priority:'mid',sort:51,title:'失業給付を受ける前提となる「求職するか」を決める',office:'ハローワーク',reason:'求職予定が未定のため。基本手当は働く意思と能力があり、求職する人向けの制度です。',sourceName:'ハローワーク',sourceUrl:S.hello});
- if(a.postWork==='reemploy'&&a.wageDrop!=='no')add({id:'wage-continuation',category:'雇用保険',timing:'60～65歳で就労中',priority:a.wageDrop==='yes'?'high':'mid',sort:52,title:'高年齢雇用継続給付の対象になるか勤務先へ確認する',office:'勤務先・ハローワーク',reason:a.wageDrop==='yes'?'60歳以降の賃金が大きく下がると回答したため。':'賃金低下の程度が不明なため。',sourceName:'ハローワーク',sourceUrl:S.continue});
- if(a.retirementPay!=='no')add({id:'retire-tax',category:'退職金・企業年金',timing:'退職金支給前',priority:a.retirementPay==='yes'?'high':'mid',sort:60,title:'「退職所得の受給に関する申告書」の提出を確認する',office:'勤務先',docs:'勤務先指定の申告書',reason:a.retirementPay==='yes'?'退職金を受け取る予定があるため。':'退職金の有無が不明なため。',sourceName:'国税庁',sourceUrl:S.taxRetire});
- if(a.companyPension!=='no')add({id:'company-pension',category:'退職金・企業年金',timing:'退職前～受給開始前',priority:a.companyPension==='yes'?'high':'mid',sort:61,title:'企業年金・厚生年金基金の請求先と受給開始時期を確認する',office:'勤務先・企業年金連合会・各制度の窓口',reason:a.companyPension==='yes'?'企業年金があると回答したため。':'企業年金の有無が不明なため。'});
- if(a.corporateDc!=='no')add({id:'dc-transfer',category:'退職金・企業年金',timing:'資格喪失後6か月以内',priority:'high',sort:62,title:'企業型確定拠出年金の資産移換手続きを行う',date:r?addMonths(r,6):'',deadline:r?`${fmt(addMonths(r,6))}頃までを目安に制度窓口へ確認`:'資格喪失後6か月以内',office:'勤務先・移換先金融機関',reason:a.corporateDc==='yes'?'企業型DCがあると回答したため。自動移換を防ぎます。':'企業型DCの有無が不明なため、勤務先に確認します。',sourceName:'iDeCo公式',sourceUrl:S.ideco});
- if(a.ideco!=='no')add({id:'ideco-status',category:'退職金・企業年金',timing:'働き方変更時',priority:a.ideco==='yes'?'mid':'low',sort:63,title:'iDeCoの加入区分・掛金・受給時期の変更要否を確認する',office:'iDeCoの運営管理機関',reason:a.ideco==='yes'?'iDeCo加入中と回答したため。':'iDeCo加入状況が不明なため。',sourceName:'iDeCo公式',sourceUrl:S.ideco});
- if(a.pensionStart==='early')add({id:'early-pension',category:'年金',timing:'請求前',priority:'high',sort:70,title:'繰上げ受給の減額と取消しできない点を確認して請求する',office:'年金事務所',reason:'65歳前の繰上げを予定しているため。障害年金などへの影響を含めて確認します。',sourceName:'日本年金機構',sourceUrl:S.pensionEarly});
- if(a.pensionStart==='normal'||a.pensionStart==='undecided'||a.pensionStart==='unknown')add({id:'pension-claim',category:'年金',timing:'65歳の約3か月前から',priority:'high',sort:71,title:'老齢基礎年金・老齢厚生年金の請求書を確認する',date:b?addMonths(addYears(b,65),-3):'',deadline:b?`${fmt(addMonths(addYears(b,65),-3))}頃から郵便物を確認`:'65歳の約3か月前から',office:'年金事務所',reason:a.pensionStart==='normal'?'65歳受給を予定しているため。':a.pensionStart==='undecided'?'受給開始時期が未定のため、請求と繰下げの違いを確認します。':'年金状況が不明なため。',sourceName:'日本年金機構',sourceUrl:S.pension});
- if(a.pensionStart==='delay')add({id:'delay-pension',category:'年金',timing:'66～75歳',priority:'high',sort:72,title:'繰下げ中の年金見込額と請求時期を毎年確認する',office:'年金事務所',reason:'繰下げを予定しているため。基礎年金と厚生年金を別々に繰下げる場合も確認します。',sourceName:'日本年金機構',sourceUrl:S.pensionDelay});
- if(a.workAfter65!=='no')add({id:'working-pension',category:'年金',timing:'65歳以降の就労中',priority:a.workAfter65==='yes'?'high':'mid',sort:73,title:'在職老齢年金と在職定時改定を確認する',office:'年金事務所・勤務先',docs:'給与・賞与資料、老齢厚生年金の月額',reason:a.workAfter65==='yes'?'65歳以降も厚生年金に加入して働く予定のため。':'65歳以降の就労が未定のため。',sourceName:'日本年金機構',sourceUrl:S.pension});
- if(['couple','family'].includes(a.household))add({id:'add-pension',category:'年金',timing:'本人または配偶者の65歳前',priority:'mid',sort:74,title:'加給年金・振替加算と配偶者の年金区分を確認する',office:'年金事務所',reason:'配偶者がいる世帯と回答したため。配偶者の年齢や加入歴で扱いが変わります。',sourceName:'日本年金機構',sourceUrl:S.pension});
- if(a.lowPension!=='no')add({id:'support-benefit',category:'年金',timing:'65歳以降・案内到着時',priority:a.lowPension==='yes'?'high':'mid',sort:75,title:'年金生活者支援給付金の対象と請求書を確認する',office:'年金事務所・給付金専用窓口',reason:a.lowPension==='yes'?'年金額が少なく、非課税世帯になる可能性があるため。':'対象になるか不明なため。',sourceName:'日本年金機構',sourceUrl:S.pensionSupport});
- add({id:'age65-care',category:'年齢の節目',timing:'65歳',priority:'high',sort:80,title:'65歳からの介護保険料決定通知と納付方法を確認する',date:b?addYears(b,65):'',office:'市区町村介護保険窓口',reason:'65歳になると介護保険料の納付先と計算方法が変わるため。',sourceName:'厚生労働省 介護サービス情報公表システム',sourceUrl:S.care});
- add({id:'age75-medical',category:'年齢の節目',timing:'75歳',priority:'high',sort:81,title:'後期高齢者医療制度への移行、保険料、窓口負担割合を確認する',date:b?addYears(b,75):'',office:'市区町村・後期高齢者医療広域連合',reason:'原則75歳で後期高齢者医療制度へ移行するため。',sourceName:'厚生労働省',sourceUrl:S.lateMedical});
- if(a.hasDependents!=='no')add({id:'age75-dependent',category:'年齢の節目',timing:'本人の75歳前',priority:'high',sort:82,title:'本人の75歳移行で、扶養家族の健康保険資格が変わらないか確認する',office:'現在の健康保険者・市区町村',reason:'扶養家族がいる、または不明と回答したため。'});
+ if(isLeavingJob&&a.healthPlan==='voluntary')add({id:'voluntary',category:'退職直後',timing:'退職後20日以内',priority:'high',sort:30,title:'健康保険の任意継続を申請する',date:r?addDays(r,20):'',deadline:r?`${fmt(addDays(r,20))}までを目安に保険者へ申請`:'資格喪失日から20日以内',office:'退職前の健康保険者',docs:'申出書、退職日が確認できる書類など',reason:'任意継続にすると回答したため。',sourceName:'協会けんぽ',sourceUrl:S.voluntary});
+ if(isLeavingJob&&a.healthPlan==='nhi')add({id:'nhi',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:31,title:'市区町村で国民健康保険の加入手続きをする',deadline:'原則14日以内。自治体で確認',office:'市区町村の国民健康保険窓口',docs:'健康保険資格喪失証明書、本人確認書類など',reason:'国民健康保険に入ると回答したため。'});
+ if(isLeavingJob&&a.healthPlan==='dependent'){
+  add({id:'dependent',category:'退職直後',timing:'退職前～退職直後',priority:'high',sort:32,title:'家族の勤務先で健康保険の被扶養者申請をする',office:'扶養に入る家族の勤務先・健康保険組合',docs:'退職証明書、健康保険資格喪失証明書、収入見込、年金・失業給付の資料など',reason:'家族の健康保険の扶養に入ると回答したため。'});
+  if(a.currentInsurance==='nhi')add({id:'nhi-withdraw',category:'退職直後',timing:'扶養認定後',priority:'high',sort:33,title:'国民健康保険に入っている場合は脱退手続きをする',office:'市区町村の国民健康保険窓口',docs:'新しい健康保険の資格情報が分かるもの、本人確認書類など',reason:'現在、国民健康保険に加入しており、家族の扶養に入る予定のため。'});
+ }
+ if(isLeavingJob&&a.healthPlan==='newjob')add({id:'newjob-insurance',category:'退職直後',timing:'再就職時',priority:'high',sort:34,title:'再就職先で健康保険の加入手続きをする',office:'再就職先の人事・総務',docs:'再就職先指定の書類、基礎年金番号が分かる書類など',reason:'新しい勤務先の健康保険に入ると回答したため。'});
+ if(isLeavingJob&&a.hasDependents==='yes')add({id:'dependent-family',category:'退職直後',timing:'退職前～退職直後',priority:'high',sort:36,title:'扶養家族の健康保険資格が変わる場合は加入・切替手続きをする',office:'現在の健康保険者・市区町村・家族の勤務先',reason:'本人の退職で、扶養家族の健康保険資格が変わる場合があるため。'});
+ if(isSpouseRetire){
+  add({id:'spouse-health',category:'退職直後',timing:'配偶者の退職前～退職直後',priority:'high',sort:37,title:'配偶者の退職に伴う健康保険の扶養・国保加入手続きをする',office:'配偶者の勤務先・市区町村・家族の勤務先',docs:'健康保険資格喪失証明書、収入見込、本人確認書類など',reason:'配偶者の退職で、本人や家族の健康保険資格が変わる場合があるため。'});
+  add({id:'spouse-pension',category:'退職直後',timing:'配偶者の退職後すぐ',priority:'high',sort:38,title:'配偶者の退職で国民年金の区分変更が必要なら手続きをする',office:'市区町村国民年金窓口・年金事務所・配偶者の勤務先',reason:'第3号被保険者から第1号被保険者への変更などが必要になる場合があるため。'});
+ }
+ if(r&&retUnder60)add({id:'national-pension',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:40,title:'国民年金第1号被保険者への切替手続きをする',deadline:'原則14日以内。市区町村または年金事務所で確認',office:'市区町村国民年金窓口・年金事務所',docs:'資格喪失日を確認できる書類、基礎年金番号確認書類など',reason:retUnder60Reason,sourceName:'日本年金機構',sourceUrl:S.pensionJoin});
+ if(r&&retUnder60&&['couple','family'].includes(a.household))add({id:'spouse-pension-switch',category:'退職直後',timing:'退職後すぐ',priority:'high',sort:41,title:'扶養されていた配偶者の国民年金区分変更手続きをする',office:'市区町村国民年金窓口・配偶者の勤務先',reason:'本人の退職により、配偶者が第3号被保険者のままではいられない場合があるため。'});
+ if(a.jobSearch==='yes')add({id:'unemployment',category:'雇用保険',timing:'離職票受領後',priority:'high',sort:50,title:isRetAge65Ambiguous?'ハローワークで求職申込みと雇用保険の受給手続きをする':isRetAge65Plus?'高年齢求職者給付金の受給手続きをする':'雇用保険の基本手当を申請する',office:'住所地を管轄するハローワーク',docs:'離職票1・2、本人確認書類、写真、口座確認書類など',reason:isRetAge65Ambiguous?'退職時年齢が65歳前後の可能性があるため、ハローワークで対象給付の案内を受けて手続きします。':isRetAge65Plus?'退職時に65歳以上で求職予定のため。':'求職予定と回答したため。',sourceName:'ハローワーク',sourceUrl:S.hello});
+ if(a.postWork==='reemploy'&&a.wageDrop==='yes')add({id:'wage-continuation',category:'雇用保険',timing:'60～65歳で就労中',priority:'high',sort:52,title:'高年齢雇用継続給付の手続きを勤務先に依頼する',office:'勤務先・ハローワーク',reason:'60歳以降の賃金が大きく下がると回答したため。',sourceName:'ハローワーク',sourceUrl:S.continue});
+ if(a.retirementPay==='yes')add({id:'retire-tax',category:'退職金・企業年金',timing:'退職金支給前',priority:'high',sort:60,title:'「退職所得の受給に関する申告書」を勤務先に提出する',office:'勤務先',docs:'勤務先指定の申告書',reason:'退職金を受け取る予定があるため。',sourceName:'国税庁',sourceUrl:S.taxRetire});
+ if(a.companyPension==='yes')add({id:'company-pension',category:'退職金・企業年金',timing:'退職前～受給開始前',priority:'high',sort:61,title:'企業年金・厚生年金基金の請求手続きをする',office:'勤務先・企業年金連合会・各制度の窓口',reason:'企業年金があると回答したため。'});
+ if(a.corporateDc==='yes')add({id:'dc-transfer',category:'退職金・企業年金',timing:'資格喪失後6か月以内',priority:'high',sort:62,title:'企業型確定拠出年金の資産移換手続きを行う',date:r?addMonths(r,6):'',deadline:r?`${fmt(addMonths(r,6))}頃までを目安に制度窓口へ`:'資格喪失後6か月以内',office:'勤務先・移換先金融機関',reason:'企業型DCがあると回答したため。自動移換を防ぎます。',sourceName:'iDeCo公式',sourceUrl:S.ideco});
+ if(a.ideco==='yes')add({id:'ideco-status',category:'退職金・企業年金',timing:'働き方変更時',priority:'mid',sort:63,title:'iDeCoの加入区分・掛金変更など必要な手続きをする',office:'iDeCoの運営管理機関',reason:'iDeCo加入中と回答したため。働き方や年金加入区分が変わると手続きが必要になる場合があります。',sourceName:'iDeCo公式',sourceUrl:S.ideco});
+ if(a.pensionStart==='early')add({id:'early-pension',category:'年金',timing:'請求前',priority:'high',sort:70,title:'老齢年金の繰上げ請求手続きをする',office:'年金事務所',reason:'65歳前の繰上げを予定しているため。',sourceName:'日本年金機構',sourceUrl:S.pensionEarly});
+ if(a.pensionStart==='normal')add({id:'pension-claim',category:'年金',timing:'65歳の約3か月前から',priority:'high',sort:71,title:'老齢基礎年金・老齢厚生年金の請求手続きをする',date:b?addMonths(addYears(b,65),-3):'',deadline:b?`${fmt(addMonths(addYears(b,65),-3))}頃から郵便物を確認し、請求書を提出`:'65歳の約3か月前から',office:'年金事務所',reason:'65歳受給を予定しているため。',sourceName:'日本年金機構',sourceUrl:S.pension});
+ if(a.pensionStart==='delay')add({id:'delay-pension',category:'年金',timing:'66～75歳で受け取り始めるとき',priority:'high',sort:72,title:'繰下げ後に受け取り始めるとき、老齢年金の請求手続きをする',office:'年金事務所',reason:'繰下げを予定しているため。受け取りを開始する時点で請求手続きが必要です。',sourceName:'日本年金機構',sourceUrl:S.pensionDelay});
+ if(['couple','family'].includes(a.household)&&(a.pensionStart==='normal'||a.pensionStart==='early'))add({id:'add-pension',category:'年金',timing:'年金請求時',priority:'mid',sort:74,title:'配偶者がいる場合は、年金請求時に必要書類を添付する',office:'年金事務所',docs:'戸籍・住民票・所得関係書類など、年金事務所の案内に従う',reason:'配偶者がいる世帯では、加給年金・振替加算などで追加書類が必要になる場合があるため。',sourceName:'日本年金機構',sourceUrl:S.pension});
+ if(a.lowPension==='yes')add({id:'support-benefit',category:'年金',timing:'案内到着後',priority:'high',sort:75,title:'年金生活者支援給付金の請求書・案内が届いたら提出する',office:'年金事務所・給付金専用窓口',reason:'請求書・案内が届いていると回答したため。提出手続きが必要です。',sourceName:'日本年金機構',sourceUrl:S.pensionSupport});
+ if(a.hasDependents==='yes')add({id:'age75-dependent',category:'年齢の節目',timing:'本人の75歳前後',priority:'high',sort:82,title:'本人が75歳になるとき、扶養家族の国保加入など必要な手続きをする',office:'現在の健康保険者・市区町村',reason:'本人が後期高齢者医療制度へ移ると、扶養家族の健康保険資格が変わる場合があるため。'});
  const currentAgeRange=ageRangeAt(a.birthYear,a.birthMonth,today());
- if(ageRangeOverlaps(currentAgeRange,65,74)&&a.disabilityLateMedical!=='no')add({id:'disability-late',category:'医療・障害',timing:'65～74歳',priority:a.disabilityLateMedical==='yes'?'high':'mid',sort:83,title:'障害認定による後期高齢者医療制度への加入可否を確認する',office:'市区町村・後期高齢者医療広域連合',reason:a.disabilityLateMedical==='yes'?'一定の障害認定を受けているため。':'該当するか不明なため。',sourceName:'厚生労働省',sourceUrl:S.lateMedical});
- add({id:'annual-tax',category:'税金・毎年',timing:'毎年',priority:'mid',sort:90,title:'源泉徴収票、住民税、健康保険料、介護保険料の通知を保存して確認する',office:'税務署・市区町村・各保険者',reason:'税・保険料は前年所得や世帯状況で変わるため。'});
- if(a.multipleIncome!=='no'||a.retirementPay!=='no')add({id:'tax-return',category:'税金・毎年',timing:'翌年の確定申告時期',priority:a.multipleIncome==='yes'?'high':'mid',sort:91,title:'所得税の確定申告または還付申告が必要か確認する',office:'税務署・国税庁確定申告書等作成コーナー',docs:'各種源泉徴収票、控除証明書',reason:a.multipleIncome==='yes'?'年金以外の収入もあるため。':'退職金の申告状況または収入状況を確認するため。',sourceName:'国税庁',sourceUrl:S.taxPension});
- if(a.highMedical!=='no'){
-  add({id:'high-medical',category:'医療・介護',timing:'高額な受診前・受診後',priority:a.highMedical==='yes'?'high':'mid',sort:100,title:'高額療養費、世帯合算、多数回該当を確認する',office:'加入している健康保険者',reason:a.highMedical==='yes'?'医療費が高くなる可能性があるため。':'医療費の状況が不明なため。'});
-  add({id:'medical-tax',category:'税金・毎年',timing:'翌年の確定申告時期',priority:'mid',sort:101,title:'医療費控除またはセルフメディケーション税制を確認する',office:'税務署',docs:'医療費通知、領収書、補填された保険金の資料',reason:'医療費が多い、または不明と回答したため。'});
+ if(ageRangeOverlaps(currentAgeRange,65,74)&&a.disabilityLateMedical==='yes')add({id:'disability-late',category:'医療・障害',timing:'65～74歳',priority:'high',sort:83,title:'障害認定による後期高齢者医療制度への加入申請をする',office:'市区町村・後期高齢者医療広域連合',reason:'65～74歳で一定の障害認定を受けているため。',sourceName:'厚生労働省',sourceUrl:S.lateMedical});
+ if(a.multipleIncome==='yes'||a.retirementPay==='yes'||a.specialTax==='yes')add({id:'tax-return',category:'税金',timing:'翌年の確定申告時期',priority:'high',sort:91,title:'所得税の確定申告または還付申告をする',office:'税務署・国税庁確定申告書等作成コーナー',docs:'各種源泉徴収票、控除証明書',reason:'年金以外の収入、退職金、寄附、住宅売却など、申告につながる可能性がある出来事があるため。',sourceName:'国税庁',sourceUrl:S.taxPension});
+ if(a.medicalInsuranceNeed==='yes'){
+  add({id:'high-medical',category:'医療・介護',timing:'高額な受診前・受診後',priority:'high',sort:100,title:'高額療養費または限度額適用認定など、医療費軽減の申請をする',office:'加入している健康保険者',docs:'保険者指定の申請書、医療費通知・領収書など',reason:'健康保険で高額療養費・限度額適用認定などの申請が必要と回答したため。'});
  }
- if(a.privateMedical!=='no'&&a.highMedical!=='no')add({id:'private-claim',category:'医療・介護',timing:'入院・手術・診断時',priority:'high',sort:102,title:'民間の医療保険・がん保険の給付を請求する',office:'加入している保険会社',reason:'民間保険に加入し、医療費が高くなる可能性があるため。'});
- if(a.careNeed!=='no'){
-  add({id:'care-application',category:'医療・介護',timing:a.careNeed==='yes'?'早めに':'介護が必要になったとき',priority:a.careNeed==='yes'?'high':'low',sort:110,title:'要介護・要支援認定を申請し、地域包括支援センターへ相談する',office:'市区町村介護保険窓口・地域包括支援センター',reason:a.careNeed==='yes'?'本人または家族に介護が必要な状況があるため。':'今は不要だが、将来の備えとして介護手続きを一覧に残すと回答したため。',sourceName:'介護サービス情報公表システム',sourceUrl:S.care});
-  add({id:'care-benefit',category:'医療・介護',timing:'介護サービス利用時',priority:a.careNeed==='yes'?'mid':'low',sort:111,title:'高額介護サービス費、負担限度額、住宅改修、福祉用具を確認する',office:'市区町村・ケアマネジャー',reason:'介護サービスの自己負担軽減や事前申請が必要な制度があるため。',sourceName:'介護サービス情報公表システム',sourceUrl:S.care});
+ if(a.medicalTaxNeed==='yes'){
+  add({id:'medical-tax',category:'税金',timing:'翌年の確定申告時期',priority:'mid',sort:101,title:'医療費控除またはセルフメディケーション税制の申告をする',office:'税務署',docs:'医療費通知、領収書、補填された保険金の資料',reason:'所得税の確定申告・還付申告として医療費関係を申告する予定があるため。'});
  }
- if(a.disabilityNeed!=='no'){
-  add({id:'disability-pension',category:'医療・障害',timing:a.disabilityNeed==='yes'?'早めに':'病気・障害が発生したとき',priority:a.disabilityNeed==='yes'?'high':'low',sort:120,title:'障害年金の初診日、保険料納付要件、障害状態を確認する',office:'年金事務所',docs:'初診日資料、診断書、病歴・就労状況等申立書など',reason:a.disabilityNeed==='yes'?'仕事や日常生活に大きな制限があるため。':'今は不要だが、将来の備えとして障害関係の手続きを一覧に残すと回答したため。',sourceName:'日本年金機構',sourceUrl:S.disability});
-  add({id:'disability-handbook',category:'医療・障害',timing:a.disabilityNeed==='yes'?'早めに':'病気・障害が発生したとき',priority:a.disabilityNeed==='yes'?'mid':'low',sort:121,title:'障害者手帳、自立支援医療、自治体の障害福祉制度を確認する',office:'市区町村障害福祉窓口・主治医',reason:'障害年金とは別制度で、対象や判定基準が異なるため。'});
+ if(a.privateMedical==='yes')add({id:'private-claim',category:'医療・介護',timing:'入院・手術・通院などの後',priority:'high',sort:102,title:'民間の医療保険・生命保険などの給付金を請求する',office:'加入している保険会社',reason:'民間保険の給付請求が必要と回答したため。'});
+ if(a.careNeed==='yes'){
+  add({id:'care-application',category:'医療・介護',timing:'介護サービス利用前',priority:'high',sort:110,title:'要介護・要支援認定を申請する',office:'市区町村介護保険窓口・地域包括支援センター',reason:'介護保険サービスを使う必要があると回答したため。',sourceName:'介護サービス情報公表システム',sourceUrl:S.care});
+ }
+ if(a.careLimit==='yes'){
+  add({id:'care-limit',category:'医療・介護',timing:'介護保険施設・ショートステイ利用前後',priority:'mid',sort:111,title:'介護保険負担限度額認定を申請する',office:'市区町村介護保険窓口',docs:'申請書、本人・配偶者の所得や預貯金等が分かる書類など',reason:'介護保険施設やショートステイの食費・居住費の負担軽減を申請したいと回答したため。',sourceName:'介護サービス情報公表システム',sourceUrl:S.care});
+ }
+ if(a.disabilityNeed==='yes'){
+  add({id:'disability-pension',category:'医療・障害',timing:'早めに',priority:'high',sort:120,title:'障害年金の請求手続きをする',office:'年金事務所',docs:'初診日資料、診断書、病歴・就労状況等申立書など',reason:'仕事や日常生活に大きな制限があるため。',sourceName:'日本年金機構',sourceUrl:S.disability});
+  add({id:'disability-handbook',category:'医療・障害',timing:'早めに',priority:'mid',sort:121,title:'障害者手帳、自立支援医療など必要な申請をする',office:'市区町村障害福祉窓口・主治医',reason:'障害年金とは別制度で、医療費や福祉サービスにつながる申請があるため。'});
  }
  if(a.driver==='yes'){
-  add({id:'driver70',category:'年齢の節目',timing:'70歳以降の免許更新前',priority:'mid',sort:130,title:'高齢者講習を予約する',office:'公安委員会・指定自動車教習所',reason:'運転免許を持っているため。',sourceName:'警察庁',sourceUrl:S.driver});
-  add({id:'driver75',category:'年齢の節目',timing:'75歳以降の免許更新前',priority:'mid',sort:131,title:'認知機能検査と、該当する場合の運転技能検査を確認する',office:'公安委員会・指定自動車教習所',reason:'運転免許を持っているため。',sourceName:'警察庁',sourceUrl:S.driver});
+  add({id:'driver70',category:'年齢の節目',timing:'70歳以降の免許更新前',priority:'mid',sort:130,title:'運転免許更新前に高齢者講習を予約する',office:'公安委員会・指定自動車教習所',reason:'運転免許を持っているため。',sourceName:'警察庁',sourceUrl:S.driver});
+  add({id:'driver75',category:'年齢の節目',timing:'75歳以降の免許更新前',priority:'mid',sort:131,title:'認知機能検査を受け、必要なら運転技能検査を受ける',office:'公安委員会・指定自動車教習所',reason:'運転免許を持っているため。',sourceName:'警察庁',sourceUrl:S.driver});
  }
- if(a.movePlan!=='no')add({id:'move',category:'住まい・家族',timing:a.movePlan==='yes'?'転居前後':'予定が決まったとき',priority:a.movePlan==='yes'?'high':'low',sort:140,title:'住所変更と保険・年金・免許・金融機関の届出を一覧で行う',office:'市区町村、年金事務所、保険者、警察署、金融機関',reason:a.movePlan==='yes'?'引越し・住み替え等の予定があるため。':'住み替え予定が未定のため。'});
- if(a.taxableHousehold!=='no'||a.residentTaxChecked!=='yes')add({id:'tax-household',category:'税金・毎年',timing:'住民税通知到着時',priority:'mid',sort:141,title:'本人の非課税と「住民税非課税世帯」を分けて確認する',office:'市区町村住民税窓口',reason:a.taxableHousehold==='yes'?'同じ世帯に課税者がいるため、本人が非課税でも非課税世帯にならない場合があります。':'世帯の課税状況を未確認または不明と回答したため。'});
- if(a.futurePrep==='yes'){
-  add({id:'asset-list',category:'将来の備え',timing:'元気なうちに',priority:'low',sort:150,title:'財産、契約、重要書類、緊急連絡先の一覧を作る',office:'本人・家族',reason:'将来の準備項目を含めると回答したため。'});
-  add({id:'will',category:'将来の備え',timing:'元気なうちに',priority:'low',sort:151,title:'遺言書、任意後見、死後事務委任の必要性を検討する',office:'公証役場・法務局・法律専門職',reason:'判断能力が低下する前でなければできない準備があるため。'});
-  add({id:'beneficiary',category:'将来の備え',timing:'定期的に',priority:'low',sort:152,title:'生命保険・iDeCo等の受取人とデジタル契約を確認する',office:'保険会社・金融機関',reason:'契約後に家族構成が変わっている場合があるため。'});
- }
- if(a.bereavement==='yes'){
-  const list=[
-   ['death-report','死亡届・火葬許可の手続きを行う','死亡後7日以内','市区町村'],
-   ['burial','健康保険の埋葬料・葬祭費を確認する','死亡後早めに','加入していた健康保険・市区町村'],
-   ['unpaid-pension','年金の死亡届、未支給年金、遺族年金を確認する','死亡後早めに','年金事務所'],
-   ['inheritance-check','相続財産と債務を調べ、相続放棄・限定承認を判断する','相続開始を知ってから原則3か月以内','家庭裁判所'],
-   ['quasi-tax','準確定申告の要否を確認する','死亡を知った日の翌日から4か月以内','税務署'],
-   ['inheritance-tax','相続税申告の要否を確認する','死亡を知った日の翌日から10か月以内','税務署'],
-   ['inheritance-registration','不動産の相続登記を行う','取得を知った日から原則3年以内','法務局']
-  ];list.forEach((x,i)=>add({id:x[0],category:'家族が亡くなったとき',timing:x[2],priority:i<4?'high':'mid',sort:160+i,title:x[1],office:x[3],reason:'家族が亡くなった場合の手続きを含めると回答したため。',sourceName:i===3?'裁判所':'' ,sourceUrl:i===3?S.inheritance:''}));
- }
- add({id:'local-benefits',category:'自治体・勤務先確認',timing:'毎年・状況変化時',priority:'low',sort:190,title:'自治体、健康保険組合、元勤務先の独自制度を確認する',office:'市区町村、健康保険組合、元勤務先',reason:'補聴器、交通、住宅改修、配食、健診、保険料減免、付加給付などは全国一律ではないため。'});
- add({id:'official-check',category:'自治体・勤務先確認',timing:'手続き前',priority:'high',sort:191,title:'申請前に最新の公的案内で期限・必要書類を再確認する',office:'各手続きの担当窓口',reason:'制度改正、自治体差、保険者差、勤務先規定の違いがあるため。'});
+
  return t.sort((x,y)=>x.sort-y.sort);
+}
+
+function buildWarnings(a){
+ const w=[];
+ const add=(s)=>{ if(s&&!w.includes(s)) w.push(s); };
+ const isLeavingJob=['employee','retired'].includes(a.workStatus);
+ const r=a.retirementDate,b=a.birthDate;
+ const retAge=r&&b?ageAt(b,r):null;
+ const retRange=r?ageRangeAt(a.birthYear,a.birthMonth,r):null;
+ if(isLeavingJob && a.healthPlan==='undecided') add('退職後の健康保険が未定のため、任意継続・国民健康保険・家族の扶養などの具体的な手続きは一覧に入れていません。');
+ if(isLeavingJob && !a.retirementDate) add('退職日が未入力のため、20日以内・6か月以内など期限日の計算はできません。');
+ if(isLeavingJob && a.healthPlan==='dependent' && a.household==='single') add('単身世帯で「家族の扶養に入る」を選んでいます。扶養に入る家族がいる前提と合わない可能性があります。');
+ if(isLeavingJob && r){
+   if(!b && !retRange) add('生まれ年が未入力のため、退職時に60歳未満かどうかで変わる国民年金手続きは一覧に入れていません。');
+   else if(retAge===null && retRange && retRange.min<60 && retRange.max>=60) add('退職時年齢が60歳前後で確定できないため、国民年金第1号への切替が必要かは一覧に入れていません。');
+ }
+ if(isLeavingJob && a.jobSearch==='unknown') add('求職するか未定のため、雇用保険の基本手当・高年齢求職者給付金の手続きは一覧に入れていません。');
+ if(a.pensionStart==='undecided'||a.pensionStart==='unknown') add('老齢年金の受給方針が未定・不明のため、老齢年金の請求・繰上げ・繰下げ関係の手続きは一覧に入れていません。');
+ if(a.corporateDc==='unknown') add('企業型DCの有無が不明のため、資産移換手続きは一覧に入れていません。勤務先資料で有無が分かれば「はい」にして作成し直してください。');
+ if(a.companyPension==='unknown') add('企業年金・厚生年金基金の有無が不明のため、企業年金の請求手続きは一覧に入れていません。');
+ if(a.ideco==='unknown') add('iDeCo加入の有無が不明のため、加入区分・掛金変更などの手続きは一覧に入れていません。');
+ if(a.lowPension==='unknown') add('年金生活者支援給付金の請求書・案内が届いているか不明のため、請求書提出の手続きは一覧に入れていません。');
+ if(a.medicalInsuranceNeed==='unknown') add('健康保険で高額療養費・限度額適用認定などの申請が必要か不明のため、医療費軽減の手続きは一覧に入れていません。');
+ if(a.medicalTaxNeed==='unknown') add('医療費控除またはセルフメディケーション税制の申告予定が不明のため、医療費関係の税申告は一覧に入れていません。');
+ if(a.careNeed==='unknown') add('介護サービス利用の必要性が不明のため、要介護・要支援認定申請は一覧に入れていません。');
+ if(a.careLimit==='unknown') add('介護保険負担限度額認定の申請要否が不明のため、一覧に入れていません。');
+ if(a.disabilityNeed==='unknown') add('障害関係の申請要否が不明のため、障害年金・障害者手帳・自立支援医療の手続きは一覧に入れていません。');
+ return w;
+}
+
+function renderWarnings(){
+ const box=$('#unresolvedBox'), list=$('#unresolvedList');
+ if(!box||!list)return;
+ if(!generatedWarnings.length){box.classList.add('hidden');list.innerHTML='';return;}
+ list.innerHTML=generatedWarnings.map(x=>`<li>${esc(x)}</li>`).join('');
+ box.classList.remove('hidden');
 }
 
 function renderResults(){
@@ -480,11 +498,12 @@ function renderResults(){
  const groups={};filtered.forEach(x=>(groups[x.category]??=[]).push(x));
  $('#taskCounter').textContent=`該当 ${filtered.length}件／全${generatedTasks.length}件　完了 ${generatedTasks.filter(x=>completion[x.id]).length}件`;
  renderTaskSummary(generatedTasks);
+ renderWarnings();
  $('#taskGroups').innerHTML=Object.entries(groups).map(([cat,items])=>`<section class="group"><h3>${esc(cat)}<span class="group-count">（${items.length}件）</span></h3>${items.map(renderTask).join('')}</section>`).join('')||'<p>条件に合う項目がありません。</p>';
  bindTaskEvents();
 }
 function summaryTiming(x){return x.date?fmt(x.date):String(x.deadline||x.timing||'随時').replace(/\s+/g,' ');}
-function summaryOffice(x){return String(x.office||'担当窓口へ確認').replace(/\s+/g,' ');}
+function summaryOffice(x){return String(x.office||'担当窓口').replace(/\s+/g,' ');}
 function renderTaskSummary(items){
  $('#summaryMeta').textContent=`${items.length}項目／作成日 ${fmt(today())}`;
  $('#summaryList').innerHTML=items.map(x=>`<li class="summary-item ${completion[x.id]?'completed':''}"><a class="summary-link" href="#task-${esc(x.id)}" data-summary-task="${esc(x.id)}" title="${esc(summaryTiming(x)+'｜'+x.title+'｜'+summaryOffice(x))}"><span class="summary-when">${esc(summaryTiming(x))}</span><span class="summary-what">${esc(x.title)}</span><span class="summary-where">${esc(summaryOffice(x))}</span></a></li>`).join('');
@@ -492,8 +511,8 @@ function renderTaskSummary(items){
 function priorityText(p){return p==='high'?'優先度：高':p==='mid'?'優先度：中':'優先度：低';}
 function renderTask(x){
  const checked=!!completion[x.id],note=String(notes[x.id]||'');return `<article id="task-${esc(x.id)}" class="task ${checked?'completed':''}" data-id="${esc(x.id)}">
-  <div class="task-head"><label class="complete-control" title="実際に確認・手続きが済んだらチェック"><input type="checkbox" class="complete-check" ${checked?'checked':''} aria-label="この手続きを完了にする"><span>完了</span></label><div><div class="task-title">${esc(x.title)}</div><div class="task-timing-line" style="color:#5f6b7a;font-size:.9rem">${x.date?fmt(x.date)+' ／ ':''}${esc(x.timing)}</div></div><div class="badges"><span class="badge ${x.priority}">${priorityText(x.priority)}</span><button class="toggle-detail" type="button">詳細</button></div></div>
-  <div class="task-detail hidden"><dl class="detail-grid"><dt>期限・時期</dt><dd>${esc(x.deadline||x.timing||'状況に応じて')}</dd><dt>確認・手続き先</dt><dd>${esc(x.office||'担当窓口へ確認')}</dd><dt>用意するもの</dt><dd>${esc(x.docs||'窓口で確認')}</dd><dt>表示理由</dt><dd>${esc(x.reason||'回答内容から確認対象になりました。')}</dd>${x.sourceUrl?`<dt>公式確認先</dt><dd><a href="${esc(x.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(x.sourceName||'公的情報')}</a></dd>`:''}</dl><textarea class="task-note" placeholder="この手続きのメモ">${esc(note)}</textarea><div class="task-note-print ${note.trim()?'has-note':''}"><span class="task-note-print-label">メモ</span><span class="task-note-print-text">${esc(note)}</span></div></div>
+  <div class="task-head"><label class="complete-control" title="実際に手続きが済んだらチェック"><input type="checkbox" class="complete-check" ${checked?'checked':''} aria-label="この手続きを完了にする"><span>完了</span></label><div><div class="task-title">${esc(x.title)}</div><div class="task-timing-line" style="color:#5f6b7a;font-size:.9rem">${x.date?fmt(x.date)+' ／ ':''}${esc(x.timing)}</div></div><div class="badges"><span class="badge ${x.priority}">${priorityText(x.priority)}</span><button class="toggle-detail" type="button">詳細</button></div></div>
+  <div class="task-detail hidden"><dl class="detail-grid"><dt>期限・時期</dt><dd>${esc(x.deadline||x.timing||'状況に応じて')}</dd><dt>手続き先</dt><dd>${esc(x.office||'担当窓口')}</dd><dt>用意するもの</dt><dd>${esc(x.docs||'窓口の案内に従う')}</dd><dt>表示理由</dt><dd>${esc(x.reason||'回答内容から必要な手続きとして抽出しました。')}</dd>${x.sourceUrl?`<dt>公式確認先</dt><dd><a href="${esc(x.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(x.sourceName||'公的情報')}</a></dd>`:''}</dl><textarea class="task-note" placeholder="この手続きのメモ">${esc(note)}</textarea><div class="task-note-print ${note.trim()?'has-note':''}"><span class="task-note-print-label">メモ</span><span class="task-note-print-text">${esc(note)}</span></div></div>
  </article>`;
 }
 function bindTaskEvents(){
@@ -509,260 +528,48 @@ $('#taskSummary').addEventListener('click',e=>{
 });
 
 const CATALOG_TEXT=`
-退職前|退職日・最終出勤日・有給休暇の確認
-退職前|再雇用・継続雇用を選ぶか確認
-退職前|退職金の支給日と金額の確認
-退職前|退職所得の受給に関する申告書の提出確認
-退職前|企業年金の有無と請求方法の確認
-退職前|企業型確定拠出年金の有無を確認
-退職前|財形貯蓄・持株会・団体保険の扱いを確認
-退職前|会社の生命保険・医療保険・団体保険の終了確認
-退職前|退職後の健康保険3案を比較
-退職前|任意継続の保険料を確認
-退職前|国民健康保険料の試算を自治体に依頼
-退職前|家族の健康保険の扶養に入れるか確認
-退職前|扶養家族が退職後も扶養扱いになるか確認
-退職前|ねんきんネットで加入記録を確認
-退職前|年金記録の漏れ・誤りを確認
-退職前|年金受給開始予定年齢を仮決定
-退職前|退職後に失業給付を申請するか確認
-退職前|住民税の残額と支払い方法を確認
-退職前|会社から受け取る書類の一覧を確認
-退職前|退職後の連絡先を会社へ届ける
-会社書類|雇用保険被保険者離職票1・2
-会社書類|雇用保険被保険者証
-会社書類|源泉徴収票
-会社書類|健康保険資格喪失証明書
-会社書類|退職証明書
-会社書類|基礎年金番号が確認できる書類
-会社書類|退職金の源泉徴収票・特別徴収票
-会社書類|企業年金・確定拠出年金の案内
-会社書類|最終給与明細
-会社書類|住民税の徴収方法に関する通知
-健康保険|健康保険の任意継続申請
-健康保険|国民健康保険への加入
-健康保険|家族の健康保険の被扶養者申請
-健康保険|退職前の健康保険の資格喪失確認
-健康保険|マイナ保険証の資格情報更新確認
-健康保険|資格確認書の必要性確認
-健康保険|扶養家族の健康保険手続き
-健康保険|退職後も受けられる傷病手当金の確認
-健康保険|健康保険組合独自の付加給付確認
-健康保険|国民健康保険料の減免・軽減確認
-国民年金|60歳未満で退職した場合の国民年金第1号への変更
-国民年金|配偶者の第3号被保険者から第1号への変更
-国民年金|家族の扶養に入る場合の第3号被保険者手続き
-国民年金|国民年金保険料の免除・納付猶予確認
-国民年金|国民年金の任意加入確認
-国民年金|付加保険料を納めるか確認
-国民年金|年金加入記録の訂正請求
-雇用保険|ハローワークで求職申込み
-雇用保険|離職票の提出
-雇用保険|雇用保険の受給資格決定
-雇用保険|失業認定への出席
-雇用保険|受給期間延長の確認
-雇用保険|再就職手当の確認
-雇用保険|就業促進定着手当などの確認
-雇用保険|教育訓練給付の確認
-雇用保険|65歳以上で離職した場合の高年齢求職者給付金確認
-雇用保険|60歳以降も働き、賃金が下がった場合の高年齢雇用継続給付確認
-雇用保険|雇用保険と年金の支給調整確認
-退職金・企業年金|退職金の受取り
-退職金・企業年金|退職所得の源泉徴収内容確認
-退職金・企業年金|退職所得の受給に関する申告書の提出漏れ確認
-退職金・企業年金|企業年金の請求
-退職金・企業年金|確定給付企業年金の請求・移換確認
-退職金・企業年金|企業型確定拠出年金の移換
-退職金・企業年金|iDeCoへの移換・加入・運用指図者選択
-退職金・企業年金|企業型DCの自動移換を防ぐ手続き
-退職金・企業年金|iDeCoの受給開始方法確認
-退職金・企業年金|個人年金保険の請求時期確認
-退職金・企業年金|財形年金・財形住宅の扱い確認
-60歳前後|国民年金の強制加入期間終了確認
-60歳前後|国民年金任意加入の検討
-60歳前後|老齢年金の繰上げ請求をするか判断
-60歳前後|特別支給の老齢厚生年金の対象確認
-60歳前後|60歳以降の再雇用契約確認
-60歳前後|高年齢雇用継続給付の対象確認
-60歳前後|企業年金・個人年金の受給開始確認
-60歳前後|住宅ローンや団体信用生命保険の条件確認
-65歳前後|老齢基礎年金の請求
-65歳前後|老齢厚生年金の請求
-65歳前後|老齢基礎年金だけを繰下げるか確認
-65歳前後|老齢厚生年金だけを繰下げるか確認
-65歳前後|加給年金の対象確認
-65歳前後|振替加算の対象確認
-65歳前後|在職老齢年金による支給停止確認
-65歳前後|雇用保険との調整確認
-65歳前後|配偶者の国民年金第3号から第1号への変更
-65歳前後|介護保険第1号被保険者への移行確認
-65歳前後|介護保険料決定通知書の確認
-65歳前後|介護保険料の納付方法確認
-65歳前後|年金生活者支援給付金の対象確認
-65歳前後|65歳以上の障害認定による後期高齢者医療加入確認
-65歳前後|自治体の65歳以上向け制度確認
-65歳以降の就労|厚生年金への加入継続確認
-65歳以降の就労|在職老齢年金の対象確認
-65歳以降の就労|給与・賞与と老齢厚生年金額の確認
-65歳以降の就労|在職定時改定による年金増額確認
-65歳以降の就労|退職改定による年金額変更確認
-65歳以降の就労|年金の請求と繰下げの比較
-65歳以降の就労|健康保険の被扶養者収入条件確認
-65歳以降の就労|確定申告が必要か確認
-70歳前後|70歳到達時の厚生年金資格に関する会社手続き確認
-70歳前後|70歳以上被用者としての在職老齢年金確認
-70歳前後|70～74歳の医療費自己負担割合確認
-70歳前後|健康保険の資格情報・負担割合確認
-70歳前後|運転免許更新時の高齢者講習予約
-70歳前後|年金繰下げ継続・請求判断
-70歳前後|住まい、車、介護への備えの再確認
-75歳前後|後期高齢者医療制度への移行確認
-75歳前後|資格確認書・資格情報のお知らせ確認
-75歳前後|医療費の窓口負担割合確認
-75歳前後|後期高齢者医療保険料の確認
-75歳前後|年金天引き・納付書などの納付方法確認
-75歳前後|本人が被用者保険から抜けることで扶養家族が資格喪失しないか確認
-75歳前後|扶養家族の国民健康保険等への加入
-75歳前後|75歳まで繰下げた年金の請求
-75歳前後|運転免許更新時の認知機能検査
-75歳前後|一定の違反歴がある場合の運転技能検査
-75歳前後|後期高齢者健診の案内確認
-税金・毎年|給与所得の源泉徴収票確認
-税金・毎年|公的年金等の源泉徴収票確認
-税金・毎年|確定申告が必要か判定
-税金・毎年|所得税の還付申告確認
-税金・毎年|医療費控除確認
-税金・毎年|セルフメディケーション税制確認
-税金・毎年|寄附金控除・ふるさと納税確認
-税金・毎年|退職所得を含めた申告確認
-税金・毎年|住民税申告が必要か確認
-税金・毎年|住民税決定通知書確認
-税金・毎年|本人が住民税非課税か確認
-税金・毎年|世帯全員が住民税非課税か確認
-税金・毎年|国民健康保険料通知確認
-税金・毎年|介護保険料通知確認
-税金・毎年|後期高齢者医療保険料通知確認
-税金・毎年|公的年金等の扶養親族等申告書確認
-低年金・生活支援|年金生活者支援給付金の案内確認
-低年金・生活支援|請求書・はがきの返送
-低年金・生活支援|世帯全員の住民税課税状況確認
-低年金・生活支援|年金以外の所得確認
-低年金・生活支援|生活保護・生活困窮者相談の案内
-低年金・生活支援|自治体独自給付の確認
-医療費|高額療養費の申請・支給確認
-医療費|自己負担限度額の所得区分確認
-医療費|限度額適用の扱い確認
-医療費|多数回該当確認
-医療費|世帯合算確認
-医療費|高額医療・高額介護合算療養費確認
-医療費|医療費控除確認
-医療費|民間医療保険・がん保険の給付請求
-医療費|傷病手当金・障害年金の可能性確認
-介護|市区町村への要介護・要支援認定申請
-介護|主治医意見書への対応
-介護|認定調査への対応
-介護|地域包括支援センターへの相談
-介護|ケアマネジャーの選定
-介護|ケアプラン作成
-介護|介護サービス事業者との契約
-介護|介護保険負担割合証の確認
-介護|高額介護サービス費の確認
-介護|介護保険負担限度額認定の申請
-介護|施設入所時の食費・居住費軽減確認
-介護|住宅改修費の事前申請
-介護|福祉用具購入・貸与の確認
-介護|家族の介護休業・介護休業給付確認
-介護|自治体の紙おむつ・配食・見守り支援確認
-病気・障害|障害年金の対象確認
-病気・障害|初診日の資料確保
-病気・障害|障害認定日の確認
-病気・障害|障害者手帳の対象確認
-病気・障害|自立支援医療の対象確認
-病気・障害|特定医療費・難病制度の確認
-病気・障害|自治体の障害福祉サービス確認
-病気・障害|健康保険の傷病手当金確認
-病気・障害|民間保険の給付申請
-病気・障害|運転免許・仕事・介護認定への影響確認
-住まい・家族|転出届・転入届・転居届
-住まい・家族|健康保険の住所変更
-住まい・家族|年金の住所情報確認
-住まい・家族|介護保険の住所変更
-住まい・家族|介護施設入所時の住所地特例確認
-住まい・家族|後期高齢者医療の住所変更
-住まい・家族|運転免許証の住所変更
-住まい・家族|銀行・証券・保険の住所変更
-住まい・家族|世帯主変更
-住まい・家族|世帯分離を検討する場合の制度影響確認
-住まい・家族|配偶者との離婚・死別時の年金・保険変更
-住まい・家族|持ち家売却時の税金確認
-住まい・家族|住宅ローン・火災保険・地震保険変更
-認知症・判断能力|重要書類の保管場所整理
-認知症・判断能力|財産一覧の作成
-認知症・判断能力|緊急連絡先の整理
-認知症・判断能力|任意後見契約の検討
-認知症・判断能力|法定後見制度の相談
-認知症・判断能力|財産管理委任契約の検討
-認知症・判断能力|死後事務委任契約の検討
-認知症・判断能力|家族信託を含む財産管理方法の専門相談
-認知症・判断能力|詐欺・訪問販売対策
-認知症・判断能力|銀行口座・暗証情報の管理方法整理
-相続・終末期|法定相続人の確認
-相続・終末期|不動産の名義確認
-相続・終末期|遺言書を作成するか検討
-相続・終末期|自筆証書遺言書保管制度の確認
-相続・終末期|公正証書遺言の検討
-相続・終末期|遺言執行者の指定検討
-相続・終末期|生命保険の受取人確認
-相続・終末期|iDeCo死亡一時金の受取人確認
-相続・終末期|デジタル資産・定額サービス一覧作成
-相続・終末期|葬儀・墓・納骨の希望整理
-相続・終末期|延命治療・医療・介護の希望整理
-相続・終末期|エンディングノート作成
-死亡後|死亡届・火葬許可の手続き
-死亡後|健康保険の資格喪失・保険証等の返却確認
-死亡後|葬祭費・埋葬料の申請確認
-死亡後|介護保険の資格喪失手続き
-死亡後|年金受給権者死亡届の確認
-死亡後|未支給年金の請求
-死亡後|遺族基礎年金の請求確認
-死亡後|遺族厚生年金の請求確認
-死亡後|寡婦年金・死亡一時金確認
-死亡後|本人の健康保険・扶養変更
-死亡後|世帯主変更
-死亡後|公共料金・通信契約変更
-死亡後|銀行・証券・保険会社への連絡
-死亡後|生命保険金請求
-死亡後|相続財産と債務の調査
-死亡後|相続放棄・限定承認の判断
-死亡後|準確定申告
-死亡後|相続税申告
-死亡後|遺産分割協議
-死亡後|不動産の相続登記
-死亡後|自動車・金融資産・不動産の名義変更
-自治体・勤務先|自治体独自の高齢者給付
-自治体・勤務先|補聴器購入助成
-自治体・勤務先|高齢者交通費・バス・タクシー助成
-自治体・勤務先|住宅改修・耐震・バリアフリー助成
-自治体・勤務先|配食・見守り・緊急通報サービス
-自治体・勤務先|紙おむつ・介護用品支給
-自治体・勤務先|予防接種助成
-自治体・勤務先|健診・歯科健診
-自治体・勤務先|国民健康保険料の独自減免
-自治体・勤務先|介護保険料の独自減免
-自治体・勤務先|健康保険組合の付加給付
-自治体・勤務先|企業年金・退職者医療制度
-自治体・勤務先|共済組合固有の給付
-自治体・勤務先|元勤務先のOB向け制度
-自治体・勤務先|地域包括支援センターの地域サービス
-`.trim();
+退職前|退職後の手続きに使う書類を勤務先から受け取る
+退職前|「退職所得の受給に関する申告書」を勤務先に提出する
+退職直後|健康保険の任意継続を申請する
+退職直後|市区町村で国民健康保険の加入手続きをする
+退職直後|家族の勤務先で健康保険の被扶養者申請をする
+退職直後|国民健康保険の脱退手続きをする
+退職直後|任意継続の資格喪失申出をする
+退職直後|再就職先で健康保険の加入手続きをする
+退職直後|国民年金第1号被保険者への切替手続きをする
+退職直後|国民年金第3号被保険者の手続きをする
+退職直後|扶養されていた配偶者の国民年金区分変更手続きをする
+雇用保険|雇用保険の基本手当を申請する
+雇用保険|高年齢求職者給付金の受給手続きをする
+雇用保険|受給期間延長を申請する
+雇用保険|高年齢雇用継続給付の手続きを勤務先に依頼する
+企業年金|企業型確定拠出年金の資産移換手続きを行う
+企業年金|iDeCoの加入区分・掛金変更など必要な手続きをする
+企業年金|企業年金・厚生年金基金の請求手続きをする
+年金|老齢年金の繰上げ請求手続きをする
+年金|老齢基礎年金・老齢厚生年金の請求手続きをする
+年金|繰下げ後に受け取り始めるとき、老齢年金の請求手続きをする
+年金|年金生活者支援給付金の請求書を提出する
+税金|所得税の確定申告または還付申告をする
+医療|高額療養費または限度額適用認定など、医療費軽減の申請をする
+医療|医療費控除またはセルフメディケーション税制の申告をする
+医療|民間の医療保険・生命保険などの給付金を請求する
+介護|要介護・要支援認定を申請する
+介護|介護保険負担限度額認定を申請する
+障害|障害年金の請求手続きをする
+障害|障害者手帳、自立支援医療など必要な申請をする
+運転免許|運転免許更新前に高齢者講習を予約する
+運転免許|認知機能検査を受け、必要なら運転技能検査を受ける
+`;
 const catalog=CATALOG_TEXT.split('\n').map((line,i)=>{const [category,title]=line.split('|');return {no:i+1,category,title};});
 function renderCatalog(){
+ if(!$('#catalogSearch')||!$('#catalogCategory')||!$('#catalogList'))return;
  const q=$('#catalogSearch').value.trim().toLowerCase(),cat=$('#catalogCategory').value;const list=catalog.filter(x=>(cat==='all'||x.category===cat)&&(!q||`${x.category} ${x.title}`.toLowerCase().includes(q)));
  $('#catalogList').innerHTML=list.map(x=>`<div class="catalog-row"><div class="catalog-cat">${x.no}. ${esc(x.category)}</div><div>${esc(x.title)}</div></div>`).join('')||'<p style="padding:14px">該当項目がありません。</p>';
 }
-function initCatalog(){const cats=[...new Set(catalog.map(x=>x.category))];$('#catalogCategory').innerHTML='<option value="all">区分：すべて</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');renderCatalog();}
+function initCatalog(){if(!$('#catalogCategory'))return;const cats=[...new Set(catalog.map(x=>x.category))];$('#catalogCategory').innerHTML='<option value="all">区分：すべて</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');renderCatalog();}
 
-function saveData(){collectAnswers();const data={app:'retirement-procedure-check',version:APP_VERSION,savedAt:new Date().toISOString(),answers,completion,notes};download(`老後手続きチェック_${today()}.json`,JSON.stringify(data,null,2),'application/json');alert('保存しました。保存先はブラウザのダウンロード先です。PCでは通常「ダウンロード」フォルダ、スマホでは「ファイル」アプリや「ダウンロード」内に保存されます。保存ファイルは暗号化されません。後日使う場合は、開始画面の「保存データから再開」からこのJSONファイルを選んでください。');}
+function saveData(){collectAnswers();const data={app:'retirement-procedure-check',version:APP_VERSION,savedAt:new Date().toISOString(),answers,completion,notes};download(`手続き漏れチェック_${today()}.json`,JSON.stringify(data,null,2),'application/json');alert('保存しました。保存先はブラウザのダウンロード先です。PCでは通常「ダウンロード」フォルダ、スマホでは「ファイル」アプリや「ダウンロード」内に保存されます。保存ファイルは暗号化されません。後日使う場合は、開始画面の「保存データから再開」からこのJSONファイルを選んでください。');}
 function download(name,text,type){const blob=new Blob(['\ufeff'+text],{type});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
 function applyLoaded(data){
  if(!data||data.app!=='retirement-procedure-check')throw new Error('このアプリの保存データではありません。');
@@ -770,7 +577,7 @@ function applyLoaded(data){
  if(loadedAnswers.birthDate&&!loadedAnswers.birthYear){const p=String(loadedAnswers.birthDate).split('-');loadedAnswers.birthYear=p[0]||'';loadedAnswers.birthMonth=p[1]?String(parseInt(p[1],10)):'';}
  if(loadedAnswers.spouseBirth&&!loadedAnswers.spouseBirthYear){const p=String(loadedAnswers.spouseBirth).split('-');loadedAnswers.spouseBirthYear=p[0]||'';loadedAnswers.spouseBirthMonth=p[1]?String(parseInt(p[1],10)):'';}
  Object.entries(loadedAnswers).forEach(([k,v])=>{const el=$('#'+k);if(el)el.value=v;else{const r=document.querySelector(`input[name="${k}"][value="${CSS.escape(v)}"]`);if(r)r.checked=true;}});
- Object.keys(completion).forEach(k=>delete completion[k]);Object.assign(completion,data.completion||{});Object.keys(notes).forEach(k=>delete notes[k]);Object.assign(notes,data.notes||{});collectAnswers();generatedTasks=buildTasks(answers);updateConditional();confirmSummary();$('#intro').classList.add('hidden');$('#wizard').classList.add('hidden');$('#results').classList.add('hidden');$('#confirm').classList.remove('hidden');window.scrollTo({top:0});alert('保存データを読み込みました。回答を直す場合は「質問に戻る」、そのまま一覧を作る場合は「手続き一覧を作成」を押してください。');
+ Object.keys(completion).forEach(k=>delete completion[k]);Object.assign(completion,data.completion||{});Object.keys(notes).forEach(k=>delete notes[k]);Object.assign(notes,data.notes||{});collectAnswers();generatedTasks=buildTasks(answers);generatedWarnings=buildWarnings(answers);updateConditional();confirmSummary();$('#intro').classList.add('hidden');$('#wizard').classList.add('hidden');$('#results').classList.add('hidden');$('#confirm').classList.remove('hidden');window.scrollTo({top:0});alert('保存データを読み込みました。回答を直す場合は「質問に戻る」、そのまま一覧を作る場合は「手続き一覧を作成」を押してください。');
 }
 function showResults(){$('#intro').classList.add('hidden');$('#wizard').classList.add('hidden');$('#confirm').classList.add('hidden');$('#results').classList.remove('hidden');renderResults();window.scrollTo({top:0});}
 
@@ -778,7 +585,7 @@ $('#startBtn').addEventListener('click',()=>{if(!$('#agree').checked){alert('説
 $('#nextBtn').addEventListener('click',()=>{if(!visibleRequiredValid())return;if(currentStep<$$('.step').length-1)showStep(currentStep+1);else{collectAnswers();confirmSummary();$('#wizard').classList.add('hidden');$('#confirm').classList.remove('hidden');window.scrollTo({top:0});}});
 $('#prevBtn').addEventListener('click',()=>{if(currentStep>0)showStep(currentStep-1);});
 $('#backToWizardBtn').addEventListener('click',()=>{$('#confirm').classList.add('hidden');$('#wizard').classList.remove('hidden');showStep(7);});
-$('#generateBtn').addEventListener('click',()=>{collectAnswers();generatedTasks=buildTasks(answers);showResults();});
+$('#generateBtn').addEventListener('click',()=>{collectAnswers();generatedTasks=buildTasks(answers);generatedWarnings=buildWarnings(answers);showResults();});
 $('#editAnswersBtn').addEventListener('click',()=>{$('#results').classList.add('hidden');$('#wizard').classList.remove('hidden');showStep(0);});
 $('#resetBtn').addEventListener('click',()=>{if(!confirm('入力内容、完了状態、メモをすべて消去します。よろしいですか？'))return;location.reload();});
 $('#showIncompleteBtn').addEventListener('click',e=>{showIncompleteOnly=!showIncompleteOnly;e.target.textContent=showIncompleteOnly?'すべて表示':'未完了だけ表示';renderResults();});
@@ -791,7 +598,7 @@ function printMode(mode){document.body.classList.remove('print-summary','print-d
 $('#summaryPrintBtn').addEventListener('click',()=>printMode('summary'));$('#detailPrintBtn').addEventListener('click',()=>printMode('detail'));$('#saveBtn').addEventListener('click',saveData);
 $('#introLoadBtn').addEventListener('click',()=>{if(!$('#agree').checked){alert('説明を確認し、チェックを入れてください。');return;}$('#loadFile').click();});$('#loadFile').addEventListener('change',async e=>{try{const f=e.target.files[0];if(!f)return;applyLoaded(JSON.parse(await f.text()));}catch(err){alert('読み込みに失敗しました。'+err.message);}finally{e.target.value='';}});
 $$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.tab-panel').forEach(x=>x.classList.add('hidden'));$('#tab-'+b.dataset.tab).classList.remove('hidden');}));
-$('#catalogSearch').addEventListener('input',renderCatalog);$('#catalogCategory').addEventListener('change',renderCatalog);
+if($('#catalogSearch'))$('#catalogSearch').addEventListener('input',renderCatalog);if($('#catalogCategory'))$('#catalogCategory').addEventListener('change',renderCatalog);
 initCatalog();updateConditional();
 </script>
 </body>
